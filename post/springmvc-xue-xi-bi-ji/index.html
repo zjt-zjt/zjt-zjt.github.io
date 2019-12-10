@@ -1,102 +1,93 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SpringMVC学习笔记 | Gridea</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://zjt-zjt.github.io/favicon.ico?v=1575984798203">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://zjt-zjt.github.io/favicon.ico?v=1575984657600">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://zjt-zjt.github.io/styles/main.css">
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://zjt-zjt.github.io">
-        <img src="https://zjt-zjt.github.io/images/avatar.png?v=1575984657600" class="site-logo">
-        <h1 class="site-title">Gridea</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://zjt-zjt.github.io">
+  <img class="avatar" src="https://zjt-zjt.github.io/images/avatar.png?v=1575984798203" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
-      
-    </div>
-    <div class="site-description">
-      温故而知新
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zjt-zjt.github.io/atom.xml" target="_blank">RSS</a>
-    </div>
+    
   </div>
 </div>
 
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">SpringMVC学习笔记</h2>
-            <div class="post-date">2018-11-08</div>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              SpringMVC学习笔记
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-11-08
+              </span>
+              <span>
+                25 min read
+              </span>
+              
+            </div>
             
-            <div class="post-content">
-              <!-- SpringMVC 第一天 -->
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <!-- SpringMVC 第一天 -->
 <h2 id="mvc设计模式">MVC设计模式</h2>
 <p>其实在之前JavaWeb阶段我们已经接触到了MVC模式。</p>
 <p>MVC里面的M指的的Model（通常包含bean、dao(mapper)、service）；V指的是View，视图层，视图层主要的技术（JSP、HTML、FreeMaker、Themeleaf）；C指的是Controller，控制层。控制层不负责具体数据、逻辑的处理和运算，它只负责将Model层的结果返回给对应的视图层去展示。</p>
@@ -838,37 +829,174 @@ public class NotAllowedInterceptor implements HandlerInterceptor {
 </code></pre>
 <h3 id="ssm整合">SSM整合</h3>
 
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#mvc%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">MVC设计模式</a></li>
+<li><a href="#springmvc%E7%9A%84%E4%BC%98%E5%8A%BF">SpringMVC的优势</a></li>
+<li><a href="#springmvc%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8">SpringMVC简单使用</a></li>
+<li><a href="#springmvc%E4%B8%BB%E8%A6%81%E7%BB%84%E4%BB%B6">SpringMVC主要组件</a>
+<ul>
+<li><a href="#rootapplicationcontext%E5%92%8Cservletapplicationcontext">RootApplicationContext和ServletApplicationContext</a>
+<ul>
+<li><a href="#%E4%B8%A4%E4%B8%AAapplicationcontext%E7%9A%84%E8%81%94%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB">两个ApplicationContext的联系和区别</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8">视图解析器</a>
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8">常用的视图解析器</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">参数传递</a>
+<ul>
+<li><a href="#%E9%A1%B5%E9%9D%A2%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E5%88%B0controller">页面参数传递到Controller</a>
+<ul>
+<li><a href="#requestparam">@RequestParam</a></li>
+<li><a href="#requestheader">@RequestHeader</a></li>
+<li><a href="#pathvariable">@PathVariable</a></li>
+<li><a href="#requestattribute">@RequestAttribute</a></li>
+<li><a href="#sessionattribute">@SessionAttribute</a></li>
+<li><a href="#cookievalue">@CookieValue</a></li>
+</ul>
+</li>
+<li><a href="#controller%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%92%E5%88%B0%E9%A1%B5%E9%9D%A2">Controller中的数据传递到页面</a>
+<ul>
+<li><a href="#model">Model</a></li>
+<li><a href="#modelandview">ModelAndView</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%A7%86%E5%9B%BE%E6%8E%A7%E5%88%B6%E5%99%A8">视图控制器</a>
+<ul>
+<li><a href="#%E8%A7%86%E5%9B%BE%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E7%94%A8%E6%B3%95">视图控制器的作用和用法</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AE%BE%E7%BD%AEweb%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%BB%98%E8%AE%A4%E6%AC%A2%E8%BF%8E%E9%A1%B5">设置Web项目的默认欢迎页</a></li>
+<li><a href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86">静态资源处理</a></li>
+<li><a href="#%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BD%AC%E5%8F%91">重定向和转发</a>
+<ul>
+<li><a href="#%E5%9C%A8servlet%E5%AE%9E%E7%8E%B0%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BD%AC%E5%8F%91">在Servlet实现重定向和转发：</a></li>
+<li><a href="#%E5%9C%A8springmvc%E4%B8%AD">在SpringMVC中</a>
+<ul>
+<li><a href="#%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F">请求转发有三种方式</a></li>
+<li><a href="#%E9%87%8D%E5%AE%9A%E5%90%91%E6%9C%89%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">重定向有两种方式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#restfull%E6%9C%8D%E5%8A%A1%E6%8E%A5%E5%8F%A3%E5%BC%80%E5%8F%91">RESTFull服务接口开发</a>
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8restfull%E6%B3%A8%E8%A7%A3">常用RESTFull注解</a></li>
+<li><a href="#%E8%BF%94%E5%9B%9Ejson%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%95%B0%E6%8D%AE-%E6%B6%88%E6%81%AF%E8%BD%AC%E6%8D%A2%E5%99%A8">返回JSON格式的数据 —— 消息转换器</a>
+<ul>
+<li><a href="#%E6%B6%88%E6%81%AF%E8%BD%AC%E6%8D%A2%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88">消息转换器是什么</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E4%B8%80%E4%B8%AA%E8%BD%AC%E6%8D%A2json%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%B6%88%E6%81%AF%E8%BD%AC%E6%8D%A2%E5%99%A8">如何配置一个转换JSON格式的消息转换器</a></li>
+</ul>
+</li>
+<li><a href="#%E9%80%9A%E8%BF%87%E7%BD%91%E9%A1%B5%E6%A8%A1%E6%8B%9Frestfull%E8%AF%B7%E6%B1%82">通过网页模拟RESTFull请求</a></li>
+<li><a href="#resttemplate%E5%B7%A5%E5%85%B7%E7%B1%BB">RestTemplate工具类</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E4%B9%B1%E7%A0%81">处理请求乱码</a></li>
+<li><a href="#%E5%9C%A8springmvc%E6%96%B9%E6%B3%95%E4%B8%AD%E6%94%AF%E6%8C%81%E7%9A%84%E5%8F%82%E6%95%B0">在SpringMVC方法中支持的参数</a><br>
+*
+<ul>
+<li><a href="#%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%94%9Fservlet%E5%AF%B9%E8%B1%A1">注入原生Servlet对象</a></li>
+<li><a href="#%E4%BB%A5%E6%B5%81%E7%9A%84%E6%96%B9%E5%BC%8F%E8%AF%BB%E5%8F%96%E8%AF%B7%E6%B1%82%E4%BD%93-%E4%BB%A5%E6%B5%81%E7%9A%84%E6%96%B9%E5%BC%8F%E5%93%8D%E5%BA%94%E5%88%B0%E5%AE%A2%E6%88%B7%E7%AB%AF">以流的方式读取请求体、以流的方式响应到客户端</a></li>
+<li><a href="#%E8%AF%BB%E5%8F%96%E8%AF%B7%E6%B1%82%E4%BD%93%E5%92%8C%E8%AF%B7%E6%B1%82%E5%A4%B4%E6%95%B0%E6%8D%AE">读取请求体和请求头数据</a></li>
+<li><a href="#%E5%90%91%E9%A1%B5%E9%9D%A2%E4%BC%A0%E5%8F%82">向页面传参</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>
+<ul>
+<li><a href="#%E8%AF%B4%E6%98%8E">说明</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8Eapache-fileupload%E9%80%9A%E7%94%A8%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%8C%85">基于Apache Fileupload通用文件上传包</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8Eservlet30%E6%A0%87%E5%87%86api%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">基于Servlet3.0标准API文件上传</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%90%8D%E4%B8%8A%E4%BC%A0%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98">文件名上传乱码问题</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8B%A6%E6%88%AA%E5%99%A8">拦截器</a>
+<ul>
+<li><a href="#%E6%8B%A6%E6%88%AA%E5%99%A8-vs-%E8%BF%87%E6%BB%A4%E5%99%A8">拦截器 VS 过滤器</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%8B%A6%E6%88%AA%E5%99%A8">如何使用拦截器</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89%E6%8B%A6%E6%88%AA%E5%99%A8%E7%B1%BB">定义拦截器类</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%8B%A6%E6%88%AA%E5%99%A8">配置拦截器</a>
+<ul>
+<li><a href="#%E5%85%A8%E5%B1%80%E6%8B%A6%E6%88%AA%E5%99%A8">全局拦截器</a></li>
+<li><a href="#%E6%8B%A6%E6%88%AA%E6%8C%87%E5%AE%9A%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8B%A6%E6%88%AA%E5%99%A8">拦截指定请求的拦截器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ssm%E6%95%B4%E5%90%88">SSM整合</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
             </div>
-            
-            
-
-            
-
-          </div>
-
+          </article>
         </div>
-      </div>
-    </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        
 
-<script type="application/javascript">
+        
 
-AOS.init();
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://zjt-zjt.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-hljs.initHighlightingOnLoad()
+<script>
+  hljs.initHighlightingOnLoad()
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
 
 </script>
 
-
-
-
+      </div>
+    </div>
   </body>
 </html>
