@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zjt-zjt.github.io</id>
     <title>Gridea</title>
-    <updated>2019-12-10T13:33:38.585Z</updated>
+    <updated>2019-12-11T10:59:00.005Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zjt-zjt.github.io"/>
     <link rel="self" href="https://zjt-zjt.github.io/atom.xml"/>
@@ -43,7 +43,7 @@
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[SpringMVC学习笔记]]></title>
+        <title type="html"><![CDATA[SpringMVC]]></title>
         <id>https://zjt-zjt.github.io/post/springmvc-xue-xi-bi-ji</id>
         <link href="https://zjt-zjt.github.io/post/springmvc-xue-xi-bi-ji">
         </link>
