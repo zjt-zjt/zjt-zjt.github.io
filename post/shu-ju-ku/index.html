@@ -1,0 +1,310 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>数据库 | Gridea</title>
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://zjt-zjt.github.io/favicon.ico?v=1576065267433">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zjt-zjt.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://zjt-zjt.github.io">
+  <img class="avatar" src="https://zjt-zjt.github.io/images/avatar.png?v=1576065267433" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              数据库
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-07-11
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <!-- more -->
+<h3 id="什么是数据库">什么是数据库？</h3>
+<p>用于存储数据的仓库。更重要的是，它能够对数据进行分类，而且可以快速找到这些数据。</p>
+<h3 id="数据库分类">数据库分类</h3>
+<ol>
+<li>
+<p>关系型数据库。</p>
+<p>关系就是一张二维表。数据库主要靠表来存储数据，有些时候表与表之间有关联关系。</p>
+<p>mysql, Oracle, SQL Server</p>
+</li>
+<li>
+<p>非关系型数据库。no-sql数据库    （not  only  sql）</p>
+<p>mongodb， redis</p>
+</li>
+</ol>
+<p>目前主流的数据库：mysql，oracle。</p>
+<h3 id="如何操作数据库">如何操作数据库</h3>
+<ol>
+<li>首先要有一个数据库服务器。---mysql安装包（32位和64位）。</li>
+<li>启动mysql服务。（net start mysql,  或者右键我的电脑-&gt;管理-&gt;服务-&gt;标准-&gt;myslq-&gt;右键启动）</li>
+<li>登陆数据库服务器。（mysql  -uroot  -p你的密码）</li>
+<li>做数据库的操作。（DDL，DCL，DML）</li>
+<li>退出数据库服务器。（exit）</li>
+</ol>
+<h3 id="数据库的常用命令">数据库的常用命令</h3>
+<p>SQL（Structured  Query  Language）结构化查询语言。它是一门语言，这门语言用于操作数据库。</p>
+<p>表是数据操作的基本单元。</p>
+<p>表中的几个概念：</p>
+<p>字段，也叫属性，也叫列名。</p>
+<p>记录，一条记录用于表示一个完整信息，也称为元组。</p>
+<ol>
+<li>
+<p>创建数据库</p>
+<p>create database 数据库名</p>
+<p>例如： create database  lanounbest;</p>
+</li>
+<li>
+<p>查看全部的数据库</p>
+<p>show databases;</p>
+</li>
+<li>
+<p>进入数据库（切换数据库）</p>
+</li>
+<li>
+<p>use 数据库名;</p>
+<p>例如：use  lanounbest;</p>
+</li>
+<li>
+<p>查看数据库中有哪些表</p>
+<p>show tables;</p>
+</li>
+<li>
+<p>删除数据库</p>
+<p>drop database 数据库名;</p>
+<p>例如：drop database lanounbest;</p>
+</li>
+<li>
+<p>创建表</p>
+<p>create table  表名(字段名  类型, 字段名 类型,....)</p>
+<pre><code class="language-sql">create table `user`(
+	`id` int(10)  primary key auto_increment,
+	`username` varchar(30) not null unique,
+	`password` varchar(16) not null,
+	`nickname` varchar(10),
+	`email` varchar(30) unique,
+	`create_time` datetime,
+	`last_login_time` datetime,
+	`status` int(5) default 1
+);
+</code></pre>
+</li>
+<li>
+<p>添加数据（插入数据）</p>
+<p>insert into 表名(列名, 列名, 列名,...) values (值,值,值,...),(值,值,值,...),...</p>
+<pre><code class="language-sql">insert into `user`(`username`, `password`) 
+values('qiaoshouyuan', '123456'),(&quot;huleilei&quot;,&quot;woaiwanjingwei&quot;);
+</code></pre>
+<p>insert into 表名 values(值,值,值...),(值,值,值,...),...</p>
+<pre><code class="language-sql">insert into `user` values (null,'liuxiang','liguang', '极客刘', 'liuxiang@163.com',
+ '2019-08-21 11:49:39', '2019-08-21 12:25:13', 1);
+</code></pre>
+</li>
+<li>
+<p>更新数据</p>
+<p>update  表名  set  列 = 值,  列 = 值, ... where 条件</p>
+<pre><code class="language-sql">update user set nickname = '老崔',password = '8888' where id = 3;
+</code></pre>
+</li>
+<li>
+<p>删除数据</p>
+<p>delete from 表名 where 条件</p>
+<pre><code class="language-sql">delete from user where id = 1;
+</code></pre>
+</li>
+<li>
+<p>删除表</p>
+<p>drop table 表名</p>
+<pre><code class="language-sql">drop table user;
+</code></pre>
+</li>
+<li>
+<p>查询数据</p>
+<p>查询指定列的数据（所有行）</p>
+<p>select  列名, 列名,... from  表名</p>
+<p>查询所有列的数据（所有行）</p>
+<p>select * from 表名</p>
+<p>查询指定列的数据（所有行，部分列起了别名）</p>
+<p>select  列名 as 新的列名, 列名 新的列名,... from  表名</p>
+</li>
+<li>
+<p>带条件的查询语句</p>
+<p>select  列名,列名,...  from  表名  where 条件</p>
+<p>条件可以是关系运算   &gt;  =   &gt;=    &lt;  &lt;=    !=</p>
+<p>条件可以是模糊查询条件   like      %    _</p>
+<p>条件可以支持  and   or</p>
+<p>条件可以支持 between ..and</p>
+<p>条件可以支持 in( )</p>
+</li>
+<li>
+<p>分组查询（group  by）</p>
+<p>分组查询是对查询结果进行分组。分组一旦成功，查询结果里相同的值只会出现一次。</p>
+<p>通常，分组后不再对单独数据进行查询，而是对整个组进行查询。可以查询 max(列名)   min(列名)   avg（列名） sum(列名)</p>
+</li>
+<li>
+<p>排序(order by)</p>
+<p>select 列名,.. from 表名 order by   列名  desc , 列名</p>
+</li>
+<li>
+<p>限制条数（分页查询）</p>
+<p>取前5条数据</p>
+<p>select  * from 表名  where  条件  limit 5;</p>
+<p>从指定下标开始取，取若干条</p>
+<p><strong>select  *  from  表名  where 条件  limit  其实下标, 条数</strong></p>
+</li>
+</ol>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%BA%93">什么是数据库？</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E7%B1%BB">数据库分类</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93">如何操作数据库</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">数据库的常用命令</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://zjt-zjt.github.io/post/spring">
+              <h3 class="post-title">
+                Spring
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://zjt-zjt.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
