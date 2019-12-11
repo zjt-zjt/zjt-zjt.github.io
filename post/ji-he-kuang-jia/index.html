@@ -1,0 +1,549 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>集合框架 | Gridea</title>
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://zjt-zjt.github.io/favicon.ico?v=1576063289314">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zjt-zjt.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://zjt-zjt.github.io">
+  <img class="avatar" src="https://zjt-zjt.github.io/images/avatar.png?v=1576063289314" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              集合框架
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-08-02
+              </span>
+              <span>
+                13 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <!-- more -->
+<p>集合：简单的说，集合就是一种容器。</p>
+<p>集合作为一种容器，里面可以存放内容，存放的每个内容称为是<strong>元素</strong>（element）。</p>
+<p>在整个集合框架里一共有2个大类容器：Collection和Map</p>
+<h2 id="collection容器interface">Collection容器（interface）</h2>
+<p>Collection是元素类容器的根<strong>接口</strong>。</p>
+<h4 id="什么是容器">什么是容器</h4>
+<p>容器是一个用于存放东西的物件。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。0</p>
+<h4 id="容器应该具备什么功能呢什么样的物件叫容器">容器应该具备什么功能呢？（什么样的物件叫容器）</h4>
+<ol>
+<li>
+<p>可以存东西</p>
+<p><strong>add(E element)</strong>  //往容器里添加一个元素。元素可以是任意类型（整数，字符串，自定义类，容器）</p>
+<p>addAll(Collection c) //往容器里添加多个元素。参数是一个容器，这个方法会把容器里的元素逐一添加进来</p>
+</li>
+<li>
+<p>查看</p>
+<p><strong>size()</strong>  //查看容器中包含多少元素</p>
+<p><strong>contains(Object o)</strong> //查看是否包含某个元素</p>
+<p>containsAll(Collection c) //查看是否包含某些元素</p>
+<p>isEmpty() //是不是一个空容器</p>
+</li>
+<li>
+<p>可以提取(删除)东西</p>
+<p>clear()  //清空容器</p>
+<p><strong>remove(Object o)</strong> //移除一个元素</p>
+<p>removeAll(Collection c) //移除参数容器中包含的元素</p>
+</li>
+<li>
+<p>其他</p>
+<p>equals(Collection c) //判断是否个另外一个容器相等。</p>
+<p>toArray() //把容器转换为数组</p>
+</li>
+</ol>
+<h3 id="listinterface">List（interface）</h3>
+<p>list的英文含义是：列表。</p>
+<p>list用于定义什么是有序容器。有序容器是容器的一种。</p>
+<p>List是一个接口，它有一个父接口Collection。<strong>List相比于Collection多了下标的概念</strong>。用标可以去访问元素。</p>
+<p>围绕下标提供了一堆方法：</p>
+<ol>
+<li>
+<p>添加元素</p>
+<p><strong>add(int index, E element)</strong> //在指定的位置添加一个元素<br>
+addAll(int index, Collection c) //在指定的位置添加多个元素</p>
+<p>删除元素</p>
+<p><strong>remove(int index)</strong> //移除指定位置的元素</p>
+</li>
+<li>
+<p>获得子列表</p>
+<p>subList(int fromIndex, int toIndex) //获取一个子列表  [formIndex, toIndex)</p>
+</li>
+<li>
+<p>更新元素</p>
+<p>set(int index, E element)// 把指定下标的元素更新为指定内容</p>
+</li>
+<li>
+<p>获取元素的位置</p>
+<p>indexOf(Object o) //获取指定元素的下标（正着查）</p>
+<p>lastIndexOf(Object o)//获取指定元素的下标（倒着查）</p>
+<p><strong>get(int index)</strong> //获取指定下标的元素</p>
+</li>
+</ol>
+<h3 id="list的实现类">List的实现类</h3>
+<h4 id="arraylist">ArrayList</h4>
+<p>ArrayList是List的实现类。既然是实现类，说明ArrayList实现了List中定义的所有方法。</p>
+<ol>
+<li>
+<p>如何创建一个ArrayList对象</p>
+<p>ArrayList()   //创建一个初始容量为10的列表。列表里尚未存放任何元素。</p>
+<p>ArrayList(int capacity) //创建一个指定初始容量的列表。列表里尚未存放任何元素</p>
+<blockquote>
+<p>初始容量: 列表刚创建时给定的容量。</p>
+<p>Collection是个容器，这个容器与之前学过的数组不同，数组是定长的容器，不能减少容量也不能增加容量。但是Collection是一个变长的容器，空间不够的时候可以扩容。</p>
+</blockquote>
+<p>ArrayList(Collection c) //创建一个包含参数中全部元素的列表。</p>
+</li>
+<li>
+<p>ArrayList的使用</p>
+<p>增删改查（API参考 List）</p>
+</li>
+</ol>
+<blockquote>
+<p>在创建ArrayList的时候必须指定元素的类型。例如：ArrayList<String></p>
+<p>一旦指定ArrayList存放什么类型的数据，以后取元素的时候，无需进行类型转换。</p>
+</blockquote>
+<ol start="3">
+<li>
+<p>遍历ArrayList</p>
+<p>假定ArrayList内容如下：</p>
+</li>
+</ol>
+<pre><code class="language-java">ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.add(&quot;张三&quot;);
+list.add(&quot;李四&quot;);
+list.add(&quot;王五&quot;);
+list.add(&quot;赵六&quot;);
+</code></pre>
+<p>遍历ArrayList的方法有很多，常用方式如下：</p>
+<p>一、使用for循环遍历</p>
+<pre><code class="language-java">for(int i = 0; i &lt; list.size(); i++){
+    String str = list.get(i);
+    System.out.println(str);
+}
+</code></pre>
+<blockquote>
+<p>使用list.size()获取元素个数， 从下标0开始循环到结束。通过list.get(i) 获取每个元素，达到遍历的效果。</p>
+</blockquote>
+<p><strong>二、使用迭代器遍历（推荐）</strong></p>
+<pre><code class="language-java">Iterator&lt;String&gt; it = list.iterator();//获取迭代器（迭代器会包含list中所有的元素）
+while(it.hasNext()){
+    String str = it.next();//获取迭代器中的元素，next执行完，迭代器会指向下一个元素。
+    System.out.println(str);
+}
+</code></pre>
+<blockquote>
+<p>Iterator是一个接口，规定了迭代器应该具有什么功能（hasNext(), next(), remove()）。</p>
+<p>hasNext()方法：用于查看是否还有元素。如果迭代器中还有元素，返回true，如果没有元素了，返回false。</p>
+<p>next()：获取当前迭代的元素，迭代器指向下一个元素。</p>
+<p>remove(): 删除当前迭代到的元素。</p>
+</blockquote>
+<p>三、使用for..each遍历元素</p>
+<pre><code class="language-java">for(String str : list){
+    System.out.println(str);//str就是被遍历到的元素。
+}
+</code></pre>
+<blockquote>
+<p>for...each是for循环的增强版，有些语言叫for..in</p>
+<p>for...each的本质是通过迭代器遍历元素。可通过XJad反编译工具反编译.class文件查看源码。</p>
+</blockquote>
+<h4 id="arraylist的优势和劣势">ArrayList的优势和劣势</h4>
+<p>ArrayList的底层实现是数组，数组最大特点：数据的内存空间是连续的，所以根据下标查找元素是非常非常快。</p>
+<p>弊端增加和删除慢，如果要删除下标为0的元素，实际上是通过循环，把下标为1的赋值给下标为0，把下标为2的赋值给下标为1的，以此类推，直到所有元素位置正确。</p>
+<p>如果要在下标为0的位置添加一个元素，它也是通过循环实现的，最大下标的元素赋值给最大下标加1的位置，第2大的下标的元素赋值给最大下标，以此类推第0个元素赋值给第1个元素，新元素覆盖下标为0的元素。</p>
+<h3 id="list的另外一个实现类-linkedlist">List的另外一个实现类 LinkedList</h3>
+<p>LinkedList使用方式同ArrayList。</p>
+<p>LinkedList与ArrayList不同，LinkedList底层靠的是双向链表在存储数据。</p>
+<p>链表的特点：增删快，查询慢（需要遍历）。</p>
+<h3 id="list的另外一个实现类-vector">List的另外一个实现类 Vector</h3>
+<p>实现方式和ArrayList几乎一模一样，Vector所有的方法是线程安全的。在线程里，如果不同的线程在访问同一个List（Vector），不会出现数据紊乱（内部加了锁，一个方法执行的时候，其他的方法等待，执行完以后，其他方法才开始执行）。因为考虑的安全性，不断的加锁和解锁，所以效率很低，速度很慢。</p>
+<h3 id="如何选择使用哪个list实现类">如何选择使用哪个List实现类？</h3>
+<ol>
+<li>
+<p>看是否在多线程环境下访问。</p>
+<p>是：Vector</p>
+<p>否：转到2</p>
+</li>
+<li>
+<p>看增删多还是查询多？</p>
+<p>增删多：LinkedList</p>
+<p>查询多：ArrayList</p>
+<p>不知道：ArrayList</p>
+</li>
+</ol>
+<p>List<Type> list = new   xxxx<Type>();</p>
+<h3 id="setinterface">Set(interface)</h3>
+<p>set是一个接口，<strong>用于描述一个元素不重复的容器</strong>。set里面的重复元素只会出现一次。</p>
+<p>首先set是一个容器，既然是容器，那么容器所应该具有的功能它都有。也就说Collection接口中定义的方法，Set里都要有。</p>
+<p>通过查阅API，发现Set没有自己独有的方法，Set里所有的方法来自于Collection。</p>
+<h3 id="set的实现类">Set的实现类</h3>
+<h4 id="hashset-普通set">HashSet （普通set）</h4>
+<p>HashSet的特点：</p>
+<ol>
+<li>不重复</li>
+<li>无序</li>
+</ol>
+<blockquote>
+<p>注意：如果要往HashSet中添加自定义类型的数据，你需要给自定义的类添加equals方法，HashSet在添加元素的时候，会拿现有元素逐一和要添加的元素比较（用equals比较），如果相等了，就不添加，比较一遍之后没有相等的，把元素加进来。</p>
+</blockquote>
+<h4 id="hashset的创建">HashSet的创建</h4>
+<ol>
+<li>
+<p>HashSet() //创建一个空的Set，初始容量为16</p>
+</li>
+<li>
+<p>HashSet(int capacity) //创建一个空的Set，初始容量为指定的容量。</p>
+</li>
+<li>
+<p>HashSet(Collection c) //创建一set，初始内容是c中的元素（会去重）。</p>
+</li>
+</ol>
+<p>HashSet的添加和删除元素API见Set</p>
+<blockquote>
+<p>HashSet没有获取元素的方法，也没有设置元素的方法。</p>
+<p>如何取元素呢？---通过遍历来读取。</p>
+</blockquote>
+<p>思考？</p>
+<p>能否使用for循环遍历Set？-----不能！因为没有下标</p>
+<h4 id="hashset的遍历">HashSet的遍历</h4>
+<p>假定有如下Set：</p>
+<pre><code class="language-java">Set&lt;String&gt; s = new HashSet&lt;&gt;();
+s.add(&quot;zhangsan&quot;);
+s.add(&quot;lisi&quot;);
+s.add(&quot;wangwu&quot;);
+s.add(&quot;zhaoliu&quot;);
+</code></pre>
+<ol>
+<li>
+<p>使用for..each遍历</p>
+<pre><code class="language-java">for(String str : s){
+    System.out.println(str);//str就是我们set中每个元素
+}
+</code></pre>
+</li>
+<li>
+<p>使用Iterator遍历</p>
+<pre><code class="language-java">Iterator&lt;String&gt; it = s.iterator();
+while(it.hasNext()){
+  String str = it.next();
+  System.out.println(str);
+}
+</code></pre>
+</li>
+</ol>
+<h4 id="set另外一个实现类-linkedhashset">Set另外一个实现类 LinkedHashSet</h4>
+<p>LinkedHashSet是一个有序的不重复的容器。</p>
+<p>特点如下：</p>
+<ol>
+<li>有序（存放顺序有序）</li>
+<li>不重复</li>
+</ol>
+<h3 id="小节">小节</h3>
+<p>Collection是什么？</p>
+<p>答：它是一个接口。用来描述容器应该具有哪些功能。（add,addAll,clear,remove,contains,size,iterator）</p>
+<p>List是什么？</p>
+<p>答：它是一个接口,这个接口继承了Colletion。用来描述一个有序的容器。有序指的是存放顺序。提供了下标的概念（index），围绕下标提供了一堆方法。（add(index,object),addAll(index,collection), remove(index),indexOf(object), lastIndexOf(object), get(index),set(index,object)）</p>
+<p>List的实现类有哪些？</p>
+<p>ArrayList：底层是数组（内存空间连续），查询快，增删慢。</p>
+<p>LinkedList：底层是链表，增删快，查询慢。</p>
+<p>Vector：线程安全。</p>
+<p><strong>List的遍历方法：</strong></p>
+<p>for循环</p>
+<p>for each</p>
+<p><strong>迭代器</strong></p>
+<p>Set是什么？</p>
+<p>答：set是一个接口，继承于Collection。用来描述不重复的容器。</p>
+<p>Set的实现类有哪些？</p>
+<p>HashSet：无序不重复。要求容器里的元素实现了equals方法。</p>
+<p>LinkedHashSet：有序不重复。有序指的是存放顺序。也需要元素实现equals放法。</p>
+<p>TreeSet：有序不重复。有序指的是内容有序。</p>
+<h3 id="treeset-是一个set的实现类">TreeSet 是一个Set的实现类</h3>
+<p>TreeSet是一个不重复的容器，而且内容有序。靠Comparable或者Comparator来实现比较，确定是否重复以及谁大谁小。</p>
+<p>TreeSet有2大类创建方式：</p>
+<ol>
+<li>自然排序。 元素本身带有比较方法（本质是元素实现了Comparable接口）</li>
+<li>比较器排序。元素本身不具备比较的能力，比较帮元素比较大小。</li>
+</ol>
+<p>TreeSet底层靠的二叉树来实现内容有序。小的元素放在树的左分支上，大的放在右分支上。读取元素时，TreeSet使用中序遍历的方式读取元素。</p>
+<p>TreeSet添加元素以及删除元素和HashSet一样。</p>
+<h3 id="小节-2">小节</h3>
+<p>Collection描述一个容器</p>
+<p>​	List：有序容器，可重复</p>
+<p>​		ArrayList： 数组</p>
+<p>​		LinkedList： 链表</p>
+<p>​		Vector：数组</p>
+<p>​	Set：不可重复，通常是无序的。</p>
+<p>​		HashSet：普通集合</p>
+<p>​		LinkedHashSet：存放顺序有序，不可重复</p>
+<p>​		TreeSet：内容有序，不可重读</p>
+<h2 id="map接口">Map（接口）</h2>
+<p>Map是用来描述一个容器，用来描述一个键值对容器。</p>
+<p>Map的特点：键不允许重复。</p>
+<p>Map和Colletion是平级的。Map数据键值对接口中的根接口。</p>
+<ol>
+<li>
+<p>添加元素到Map中</p>
+<p><strong>put(key, value)</strong> //往Map中存放元素，如果Map中已经有这个key了，会覆盖。如果Map中没有这个key，会把这个键值对存入map</p>
+<p>putAll(Map map) //把另外一个map中的元素全部添加到当前map中，如果有key已经存在了，会产生覆盖。</p>
+</li>
+<li>
+<p>移除元素</p>
+<p><strong>remove(key)</strong> //根据key移除对应的键值对。</p>
+</li>
+<li>
+<p>修改元素</p>
+<p>put(key, value) //如果Map中已经有这个key了，会覆盖. 如果没有就是添加</p>
+</li>
+<li>
+<p>查看Map</p>
+<p><strong>size()</strong> //查看里面有多少键值对</p>
+<p>containsKey(key) //查看是否有某个key</p>
+<p>containsValue(value) //查看是否有某个value</p>
+<p><strong>get(key)</strong> //获取key对应的值。</p>
+<p><strong>keySet()</strong> //获取所有的key</p>
+<p>values() //获取所有的value</p>
+<p><strong>entrySet</strong> //获取键值对集合</p>
+</li>
+</ol>
+<h2 id="map的实现类">Map的实现类</h2>
+<h3 id="hashmap">HashMap</h3>
+<p>HashMap是一个普通的Map。</p>
+<h4 id="创建hashmap">创建HashMap</h4>
+<ol>
+<li>HashMap()  创建一个空的Map，初始容量是16， 加载因子是0.75</li>
+<li>HashMap(int capacity) 创建一个空的Map， 初始容量为指定的容量，加载因子是0.75</li>
+<li>HashMap(int capacity, float loadFactor) 创建一个空的Map，初始容量和加载因子由参数指定。</li>
+<li>HashMap(Map map) 创建一个包含指定键值对的Map。</li>
+</ol>
+<h3 id="hashmap的使用">HashMap的使用</h3>
+<p>增删改查 见Map的API</p>
+<h3 id="map的遍历">Map的遍历</h3>
+<p>假定有如下Map：</p>
+<pre><code class="language-java">Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+map.put(&quot;one&quot;, 100);
+map.put(&quot;two&quot;, 88);
+map.put(&quot;three&quot;, 96);
+map.put(&quot;four&quot;, 88);
+</code></pre>
+<p>for each遍历</p>
+<pre><code class="language-java">Set&lt;String&gt; keys = map.keySet();
+for(String key : keys) {
+	System.out.println(key+ &quot;----&quot; + map.get(key));
+}
+</code></pre>
+<p>使用迭代器遍历</p>
+<pre><code class="language-java">Iterator&lt;String&gt; it = keys.iterator();
+while(it.hasNext()) {
+	String key = it.next();
+	int value = map.get(key);
+	System.out.println(key + &quot;===&quot; + value);
+}
+</code></pre>
+<p>for each遍历键值对</p>
+<pre><code class="language-java">Set&lt;Entry&lt;String, Integer&gt;&gt; entries = map.entrySet();
+for(Entry&lt;String, Integer&gt; e : entries) {
+	System.out.println(e.getKey()+ &quot;__&quot;+ e.getValue());
+}
+</code></pre>
+<blockquote>
+<p>Entry是专门服务于Map的类。它代表键值对对象，内部含有键和值。如果要取出键和值，使用getKey()以及getValue().</p>
+<p>Entry本质上Map中内部类。</p>
+</blockquote>
+<p>迭代器遍历键值对</p>
+<pre><code class="language-java">Iterator&lt;Entry&lt;String,Integer&gt;&gt; it2 = entries.iterator();
+while(it2.hasNext()) {
+	Entry&lt;String, Integer&gt; e = it2.next();
+	System.out.println(e.getKey()+&quot;  &quot;+e.getValue());
+}
+</code></pre>
+<h4 id="linkedhashmap">LinkedHashMap</h4>
+<p>存放顺序有序的Map。特点：存放顺序有序，键不能重复。</p>
+<h4 id="treemap">TreeMap</h4>
+<p>key的内容有序的Map。特点：key的内容有序，键不能重复。</p>
+<h4 id="hashtable">HashTable</h4>
+<p>它与HashMap非常类似，只不过HashTable是线程安全的。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#collection%E5%AE%B9%E5%99%A8interface">Collection容器（interface）</a><br>
+*
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%B9%E5%99%A8">什么是容器</a></li>
+<li><a href="#%E5%AE%B9%E5%99%A8%E5%BA%94%E8%AF%A5%E5%85%B7%E5%A4%87%E4%BB%80%E4%B9%88%E5%8A%9F%E8%83%BD%E5%91%A2%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%89%A9%E4%BB%B6%E5%8F%AB%E5%AE%B9%E5%99%A8">容器应该具备什么功能呢？（什么样的物件叫容器）</a></li>
+<li><a href="#listinterface">List（interface）</a></li>
+<li><a href="#list%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB">List的实现类</a>
+<ul>
+<li><a href="#arraylist">ArrayList</a></li>
+<li><a href="#arraylist%E7%9A%84%E4%BC%98%E5%8A%BF%E5%92%8C%E5%8A%A3%E5%8A%BF">ArrayList的优势和劣势</a></li>
+</ul>
+</li>
+<li><a href="#list%E7%9A%84%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%8E%B0%E7%B1%BB-linkedlist">List的另外一个实现类 LinkedList</a></li>
+<li><a href="#list%E7%9A%84%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%8E%B0%E7%B1%BB-vector">List的另外一个实现类 Vector</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8%E5%93%AA%E4%B8%AAlist%E5%AE%9E%E7%8E%B0%E7%B1%BB">如何选择使用哪个List实现类？</a></li>
+<li><a href="#setinterface">Set(interface)</a></li>
+<li><a href="#set%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB">Set的实现类</a>
+<ul>
+<li><a href="#hashset-%E6%99%AE%E9%80%9Aset">HashSet （普通set）</a></li>
+<li><a href="#hashset%E7%9A%84%E5%88%9B%E5%BB%BA">HashSet的创建</a></li>
+<li><a href="#hashset%E7%9A%84%E9%81%8D%E5%8E%86">HashSet的遍历</a></li>
+<li><a href="#set%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%AE%9E%E7%8E%B0%E7%B1%BB-linkedhashset">Set另外一个实现类 LinkedHashSet</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B0%8F%E8%8A%82">小节</a></li>
+<li><a href="#treeset-%E6%98%AF%E4%B8%80%E4%B8%AAset%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB">TreeSet 是一个Set的实现类</a></li>
+<li><a href="#%E5%B0%8F%E8%8A%82-2">小节</a></li>
+</ul>
+</li>
+<li><a href="#map%E6%8E%A5%E5%8F%A3">Map（接口）</a></li>
+<li><a href="#map%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB">Map的实现类</a>
+<ul>
+<li><a href="#hashmap">HashMap</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BAhashmap">创建HashMap</a></li>
+</ul>
+</li>
+<li><a href="#hashmap%E7%9A%84%E4%BD%BF%E7%94%A8">HashMap的使用</a></li>
+<li><a href="#map%E7%9A%84%E9%81%8D%E5%8E%86">Map的遍历</a>
+<ul>
+<li><a href="#linkedhashmap">LinkedHashMap</a></li>
+<li><a href="#treemap">TreeMap</a></li>
+<li><a href="#hashtable">HashTable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://zjt-zjt.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
