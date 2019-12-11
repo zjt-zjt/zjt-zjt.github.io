@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zjt-zjt.github.io</id>
     <title>Gridea</title>
-    <updated>2019-12-11T11:48:19.093Z</updated>
+    <updated>2019-12-11T11:51:11.843Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zjt-zjt.github.io"/>
     <link rel="self" href="https://zjt-zjt.github.io/atom.xml"/>
@@ -2491,6 +2491,359 @@ public class NotAllowedInterceptor implements HandlerInterceptor {
 
 </code></pre>
 <h3 id="ssm整合">SSM整合</h3>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ajax]]></title>
+        <id>https://zjt-zjt.github.io/post/ajax</id>
+        <link href="https://zjt-zjt.github.io/post/ajax">
+        </link>
+        <updated>2018-12-14T11:49:45.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<h2 id="ajax">Ajax</h2>
+<ul>
+<li>是什么?</li>
+</ul>
+<blockquote>
+<p>“Asynchronous Javascript And XML”（异步JavaScript和XML），</p>
+</blockquote>
+<blockquote>
+<p>并不是新的技术，只是把原有的技术，整合到一起而已。</p>
+</blockquote>
+<pre><code>1.使用CSS和XHTML来表示。
+2.使用DOM模型来交互和动态显示。
+3.使用XMLHttpRequest来和服务器进行异步通信。
+4.使用javascript来绑定和调用。
+</code></pre>
+<ul>
+<li>有什么用?</li>
+</ul>
+<blockquote>
+<p>咱们的网页如果想要刷新局部内容。 那么需要重新载入整个网页。用户体验不是很好。  就是为了解决局部刷新的问题。 保持其他部分不动，只刷新某些地方。</p>
+</blockquote>
+<h3 id="数据请求-get">数据请求 Get</h3>
+<h4 id="创建ajax请求对象">创建ajax请求对象</h4>
+<pre><code class="language-javascript">function  ajaxFunction(){
+	    var xmlHttp;
+	    try{ // Firefox, Chrome, Opera 8.0+, Safari
+	        xmlHttp=new XMLHttpRequest();
+	    }
+	    catch (e){
+	        try{// Internet Explorer（高版本）
+	            xmlHttp=new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+	        }
+	        catch (e){
+	            try{// Internet Explorer（低版本）
+	                xmlHttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+	            }
+	            catch (e){}
+	        }
+	    }
+	    return xmlHttp;
+	}
+</code></pre>
+<h4 id="发送请求">发送请求</h4>
+<pre><code class="language-javascript">//执行get请求
+function get() {
+
+    //1. 创建xmlhttprequest 对象
+    var request = ajaxFunction();
+
+    //2. 发送请求。
+    /*	
+	 *	参数一： 请求类型  GET or  POST
+	 *	参数二： 请求的路径
+	 *	参数三： 是否异步， true  or false
+	 */
+    request.open(&quot;GET&quot; ,&quot;TestServlet&quot; ,true );
+    request.send();
+}
+
+
+
+// 如果发送请求的同时，还想获取数据，那么代码如下
+
+//执行get请求
+function get() {
+
+    //1. 创建xmlhttprequest 对象
+    var request = ajaxFunction();
+
+    //2. 设置请求参数
+    request.open(&quot;GET&quot; ,&quot;TestServlet?name=aa&amp;age=18&quot; ,true );
+
+    //3. 获取响应数据 注册监听的意思。  一会准备的状态发生了改变，那么就执行 = 号右边的方法
+    request.onreadystatechange = function(){
+        // readyState的值一共有5个状态，参见下表
+        // readyState == 4 表示请求已经完成， 再判断状态码是否是200，200表示服务端正常响应(没有报错)
+        if(request.readyState == 4 &amp;&amp; request.status == 200){
+            //弹出响应的信息
+            alert(request.responseText);
+        }
+    }
+    
+    // 4. 发送请求
+    request.send();
+}
+</code></pre>
+<h3 id="xmlhttprequest-readystate状态表">XMLHttpRequest readyState状态表</h3>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td><code>UNSENT</code></td>
+<td>代理被创建，但尚未调用 open() 方法。</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td><code>OPENED</code></td>
+<td><code>open()</code> 方法已经被调用。</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td><code>HEADERS_RECEIVED</code></td>
+<td><code>send()</code> 方法已经被调用，并且头部和状态已经可获得。</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td><code>LOADING</code></td>
+<td>请求中； <code>responseText</code> 属性已经包含部分数据。</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td><code>DONE</code></td>
+<td>请求完成。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据请求-post">数据请求 Post</h3>
+<pre><code class="language-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+	//1. 创建对象
+	// 和get请求一样
+	
+	function post() {
+		//1. 创建请求对象
+		var request = ajaxFunction();
+		
+		// 2. 设置请求地址、参数、类型(post、get)
+		request.open(&quot;post&quot;, &quot;StudentServlet&quot;, true);
+		
+		//3. 获取响应数据 注册监听的意思。  一会准备的状态发生了改变，那么就执行 = 号右边的方法
+	    request.onreadystatechange = function(){
+	        //前半段表示 已经能够正常处理。  再判断状态码是否是200
+	        if(request.readyState == 4 &amp;&amp; request.status == 200){
+	            //弹出响应的信息
+	            console.log(&quot;请求完成&quot;);
+	            var h1 = document.getElementById(&quot;h1&quot;);
+	        	h1.innerHTML = request.responseText;
+	        }
+	    }
+		
+	 	// 4. 如果使用的是post方式带数据，那么 这里要添加头， 说明提交的数据类型是一个经过url编码的form表单数据
+		request.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+		
+		// 5. 发送请求
+    	// 如果是GET请求，参数写在这里是无效的
+		request.send(&quot;id=555&quot;);
+	}
+
+&lt;/script&gt;
+</code></pre>
+<h2 id="jquery-ajax">JQuery Ajax</h2>
+<h3 id="底层ajax写法">底层ajax写法</h3>
+<pre><code class="language-javascript">// 语法：$.ajax(url, [settings]);
+
+$.ajax(&quot;TestServlet&quot;, {
+    type: &quot;GET&quot;,
+    data: {
+        action: &quot;json&quot;,
+        uname: &quot;zhangsan&quot;
+    },
+    dataType: &quot;json&quot;,
+    success: function(data, status_text){
+        console.log(data);
+        console.log(&quot;status_text: &quot; + status_text);
+    },
+    error: function(xhr, textStatus, errorThrow) {
+        console.log(&quot;请求失败&quot;);
+    }
+});
+</code></pre>
+<blockquote>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">.</mi><mi>a</mi><mi>j</mi><mi>a</mi><mi>x</mi><mi mathvariant="normal">方</mi><mi mathvariant="normal">法</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">其</mi><mi mathvariant="normal">他</mi><mi mathvariant="normal">所</mi><mi mathvariant="normal">有</mi><mi>a</mi><mi>j</mi><mi>a</mi><mi>x</mi><mi mathvariant="normal">相</mi><mi mathvariant="normal">关</mi><mi mathvariant="normal">方</mi><mi mathvariant="normal">法</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">底</mi><mi mathvariant="normal">层</mi><mi mathvariant="normal">实</mi><mi mathvariant="normal">现</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">其</mi><mi mathvariant="normal">他</mi><mi mathvariant="normal">方</mi><mi mathvariant="normal">法</mi><mi mathvariant="normal">都</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">在</mi><mi mathvariant="normal">它</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">基</mi><mi mathvariant="normal">础</mi><mi mathvariant="normal">上</mi><mi mathvariant="normal">给</mi><mi mathvariant="normal">我</mi><mi mathvariant="normal">们</mi><mi mathvariant="normal">封</mi><mi mathvariant="normal">装</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">更</mi><mi mathvariant="normal">方</mi><mi mathvariant="normal">便</mi><mi mathvariant="normal">使</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">方</mi><mi mathvariant="normal">法</mi><mi mathvariant="normal">。</mi><mi mathvariant="normal">关</mi><mi mathvariant="normal">于</mi></mrow><annotation encoding="application/x-tex">.ajax方法是其他所有ajax相关方法的底层实现，其他方法都是在它的基础上给我们封装的更方便使用的方法。 关于</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord">.</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">法</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">其</span><span class="mord cjk_fallback">他</span><span class="mord cjk_fallback">所</span><span class="mord cjk_fallback">有</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mord cjk_fallback">相</span><span class="mord cjk_fallback">关</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">法</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">底</span><span class="mord cjk_fallback">层</span><span class="mord cjk_fallback">实</span><span class="mord cjk_fallback">现</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">其</span><span class="mord cjk_fallback">他</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">法</span><span class="mord cjk_fallback">都</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">在</span><span class="mord cjk_fallback">它</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">基</span><span class="mord cjk_fallback">础</span><span class="mord cjk_fallback">上</span><span class="mord cjk_fallback">给</span><span class="mord cjk_fallback">我</span><span class="mord cjk_fallback">们</span><span class="mord cjk_fallback">封</span><span class="mord cjk_fallback">装</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">更</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">便</span><span class="mord cjk_fallback">使</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">方</span><span class="mord cjk_fallback">法</span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">关</span><span class="mord cjk_fallback">于</span></span></span></span>.ajax的详细介绍参见 <a href="http://jquery.cuishifeng.cn/jQuery.Ajax.html">http://jquery.cuishifeng.cn/jQuery.Ajax.html</a></p>
+</blockquote>
+<h3 id="get请求">get请求</h3>
+<pre><code class="language-javascript">/*
+ * 参数：
+ *  url: 请求地址
+ *  data: 待发送 Key/value 参数
+ *  fn: 请求成功后回调函数
+ *  type: 返回内容格式，xml, html, script, json, text, _default
+ */
+
+$.get( &quot;url&quot;,{pid:pid} ,function(data,status_text){
+    console.log(data);
+    console.log(&quot;status_text: &quot; + status_text);
+},&quot;json&quot; );	// 指定请求返回的格式是json，jquery会帮我们把服务端返回的json字符串转换成js的json对象
+</code></pre>
+<h3 id="post请求">post请求</h3>
+<pre><code class="language-javascript">/*
+ * 参数：
+ *  url: 请求地址
+ *  data: 待发送 Key/value 参数
+ *  fn: 请求成功后回调函数
+ *  type: 返回内容格式，xml, html, script, json, text, _default
+ */
+
+$.post( &quot;url&quot;,{pid:pid} ,function(data,status){
+    console.log(data);
+    console.log(&quot;status_text: &quot; + status_text);
+},&quot;json&quot; );	// 指定请求返回的格式是json，jquery会帮我们把服务端返回的json字符串转换成js的json对象
+</code></pre>
+<h3 id="获取json数据专用方法">获取JSON数据专用方法</h3>
+<pre><code class="language-javascript">$.getJSON(&quot;url&quot;, {id:1, name: &quot;zhangsan&quot;} function(json){
+  console.log(json);
+});
+</code></pre>
+<h2 id="服务器和客户端数据传输的方式">服务器和客户端数据传输的方式</h2>
+<h3 id="xml">xml</h3>
+<p>因为无效数据占比太大，阅读困难。基本已经被json格式淘汰掉了</p>
+<pre><code class="language-xml">  	&lt;list&gt;
+        &lt;city&gt;
+        &lt;id&gt;1&lt;id&gt;
+        &lt;pid&gt;1&lt;/pid&gt;
+        &lt;cname&gt;深圳&lt;/cname&gt;
+        &lt;/city&gt;
+        &lt;city &gt;
+        &lt;id&gt;2&lt;id&gt;
+        &lt;pid&gt;1&lt;/pid&gt;
+        &lt;cname&gt;东莞&lt;/cname&gt;
+        &lt;/city&gt;
+    &lt;/list&gt;
+</code></pre>
+<h3 id="json">json</h3>
+<p>阅读性更好 、 占用空间更小。</p>
+<pre><code class="language-json">[{city:{id:1, pid:1, cname:&quot;深圳&quot;}}, {city:{id:2, pid:1, cname:&quot;东莞&quot;}}]
+</code></pre>
+<h4 id="fastjson库">fastjson库</h4>
+<pre><code>JSON.toJSONString();	// 将JavaBean encode成 json string
+JSON.parseObject();		// 将json对象decode成javabean
+JSON.parseArray();		// 将json数组decode成java List或 JSONArray类型
+</code></pre>
+<h2 id="练习案例-校验用户名是否可用">练习案例 校验用户名是否可用</h2>
+<h3 id="需求分析">需求分析</h3>
+<ul>
+<li>
+<p>页面</p>
+<body>
+<pre><code>  &lt;table border=&quot;1&quot; width=&quot;500&quot;&gt;
+  	&lt;tr&gt;
+  		&lt;td&gt;用户名:&lt;/td&gt;
+  		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;name&quot; id=&quot;name&quot;  onblur=&quot;checkUserName()&quot;&gt;&lt;span id=&quot;span01&quot;&gt;&lt;/span&gt;&lt;/td&gt; 
+  	&lt;/tr&gt;
+  	&lt;tr&gt;
+  		&lt;td&gt;密码&lt;/td&gt;
+  		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;&quot;&gt;&lt;/td&gt;
+  	&lt;/tr&gt;
+  	&lt;tr&gt;
+  		&lt;td&gt;邮箱&lt;/td&gt;
+  		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;&quot;&gt;&lt;/td&gt;
+  	&lt;/tr&gt;
+  	&lt;tr&gt;
+  		&lt;td&gt;简介&lt;/td&gt;
+  		&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;&quot;&gt;&lt;/td&gt;
+  	&lt;/tr&gt;
+  	&lt;tr&gt;
+  		&lt;td colspan=&quot;2&quot;&gt;&lt;input type=&quot;submit&quot; value=&quot;注册&quot;&gt;&lt;/td&gt;
+  	&lt;/tr&gt;
+</code></pre>
+ 	</table>
+</body>
+</li>
+<li>
+<p>需求描述<br>
+实现用户注册时，在页面不跳转的情况下。提示用户输入的用户名是否已经存在。如果不存在显示正常状态；如果已经存在提示用户此用户名已经被占用。全程页面不能发生跳转。</p>
+</li>
+</ul>
+<h2 id="案例练习二-使用ajax技术实现省市联动">案例练习二 使用Ajax技术实现省市联动</h2>
+<h3 id="需求分析-2">需求分析</h3>
+<ul>
+<li>页面</li>
+</ul>
+<body>
+    省份: 
+<select name="province" id ="province">
+    <option value="" >-请选择 -
+    <option value="1" >广东
+    <option value="2" >湖南
+    <option value="3" >湖北
+    <option value="4" >四川
+    </select>
+<pre><code>城市: 
+
+&lt;select name=&quot;city&quot; id=&quot;city&quot;&gt;
+&lt;option value=&quot;&quot; &gt;-请选择 -
+&lt;/select&gt;
+</code></pre>
+</body>
+<ul>
+<li>需求分析</li>
+</ul>
+<p>实现用户选择了一个省份以后，动态从后台查询该省份有哪些地市。 用户只能选择该省份所属的地市。 全程页面无刷新</p>
+<p>js代码</p>
+<pre><code class="language-javascript">$(function() {
+    //1。找到省份的元素
+    $(&quot;#province&quot;).change(function() {
+        //2. 一旦里面的值发生了改变，那么就去请求该省份的城市数据
+        //$(&quot;#province&quot;).varl();
+        var pid = $(this).val();
+
+        /*[
+        {
+        &quot;cname&quot;: &quot;深圳&quot;,
+        &quot;id&quot;: 1,
+        &quot;pid&quot;: 1
+        },
+        {
+        &quot;cname&quot;: &quot;东莞&quot;,
+        &quot;id&quot;: 2,
+        &quot;pid&quot;: 1
+        }
+        ...
+        ]*/
+        $.post( &quot;CityServlet02&quot;,{pid:pid} ,function(data,status){
+            //先清空
+            $(&quot;#city&quot;).html(&quot;&lt;option value='' &gt;-请选择-&quot;);
+            //再遍历，追加
+            $(data).each(function(index , c) {
+                $(&quot;#city&quot;).append(&quot;&lt;option value='&quot;+c.id+&quot;' &gt;&quot;+c.cname)
+            });
+        },&quot;json&quot; );
+	});
+});
+</code></pre>
+<h2 id="总结">总结</h2>
+<h3 id="ajax-2">Ajax</h3>
+<pre><code>* 创建请求对象
+
+* 发送get请求
+
+* 发送post请求
+</code></pre>
+<h3 id="jquery">JQuery</h3>
+<pre><code>发送get请求
+
+发送post请求
+</code></pre>
+<p>​</p>
+<h3 id="服务器返回json数据">服务器返回json数据</h3>
 ]]></content>
     </entry>
     <entry>
