@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zjt-zjt.github.io</id>
     <title>Gridea</title>
-    <updated>2019-12-11T11:21:53.586Z</updated>
+    <updated>2019-12-11T11:47:29.186Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zjt-zjt.github.io"/>
     <link rel="self" href="https://zjt-zjt.github.io/atom.xml"/>
@@ -2523,6 +2523,459 @@ public class NotAllowedInterceptor implements HandlerInterceptor {
 <p>未来，它一定会成为你离不开的伙伴</p>
 <p>尽情发挥你的才华吧！</p>
 <p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[多线程]]></title>
+        <id>https://zjt-zjt.github.io/post/duo-xian-cheng</id>
+        <link href="https://zjt-zjt.github.io/post/duo-xian-cheng">
+        </link>
+        <updated>2018-11-07T11:45:24.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<h4 id="1-什么是进程">1、什么是进程？</h4>
+<p>一个正在运行的程序就是一个进程。进程是操作系统资源分配（计算资源，比如CPU，存储：内存）的最小单位。</p>
+<h4 id="2-什么是线程">2、什么是线程</h4>
+<p>线程是资源调度的最小单位（线程在消耗资源）。线程的主要作用执行任务，一个线程可以执行很多任务。</p>
+<h2 id="什么是单线程">什么是单线程？</h2>
+<p>如果一个进程，只有一个线程。这样的程序叫做单线程程序。</p>
+<p>好处：资源可以最大化使用。不会出现争夺资源的问题。</p>
+<p>缺陷：效率很低，容易阻塞。无法处理并发任务（例如：多人聊天）。</p>
+<p>当你程序启动的时候，JVM会创建一个线程执行你的main函数，这个线程称为主线程。</p>
+<h2 id="什么是多线程">什么是多线程？</h2>
+<p>如果一个进程，拥有不止一个线程。这样的程序称为多线程程序。</p>
+<p>优势：可以同时执行多个任务。提高运行的效率。</p>
+<h3 id="什么时候使用多线程">什么时候使用多线程？</h3>
+<ol>
+<li>多个任务互不影响，任务之间没有交集，谁先执行完，谁后执行完无所谓。这种时候可以使用多线程，让多个任务同时执行。</li>
+<li>当你有一个任务很耗时，可以把这个耗时的任务放到一个单独线程里执行，这样就不会阻塞程序的执行。</li>
+<li>你的需求只能靠多线程（多人聊天，英雄联盟各个角色的操作）完成的时候，要使用多线程。</li>
+</ol>
+<h3 id="如何使用多线程">如何使用多线程?</h3>
+<ol>
+<li>使用Thread的子类</li>
+<li>让一个类实现Runable接口</li>
+</ol>
+<h4 id="一-使用thread的子类">一、使用Thread的子类</h4>
+<ol>
+<li>创建一个类继承于Thread。</li>
+<li>重写这个类的run方法。</li>
+</ol>
+<pre><code class="language-java">public class MyThread extends Thread {
+
+	public MyThread() {
+		super();
+	}
+
+	public MyThread(String name) {
+		super(name);
+	}
+
+	@Override
+	public void run() {
+		System.out.println(&quot;我是一个子线程&quot;);
+		for(int i = 0; i &lt; 500000; i++) {
+			System.out.println(i);
+		}
+	}
+}
+</code></pre>
+<blockquote>
+<p>MyThread是一个类，因此可以根据需要添加属性以及方法，也就是说普通类能有的这个类都可以有。</p>
+</blockquote>
+<ol start="3">
+<li>创建MyThread类的对象</li>
+<li>启动线程</li>
+</ol>
+<pre><code class="language-java">public class TestMultiplyThread2 {
+
+	public static void main(String[] args) {
+		
+		Thread mt = new MyThread(&quot;线程A&quot;);
+		//mt.run();//如果直接调用run方法，并不会新的线程中执行任务。
+		mt.start();//start方法才在新的线程中执行run方法。
+		
+		System.out.println(&quot;hello world&quot;);
+	}
+
+}
+</code></pre>
+<hr>
+<p>匿名类的写法</p>
+<pre><code class="language-java">public class TestMultiplyThread2 {
+
+	public static void main(String[] args) {
+		Thread t1 = new Thread(&quot;线程B&quot;) {
+			@Override
+			public void run() {
+				System.out.println(&quot;我是一个子线程&quot;);
+				for(int i = 0; i &lt; 500000; i++) {
+					System.out.println(i);
+				}
+			}
+		};
+		t1.start();
+		
+		System.out.println(&quot;hello world&quot;);
+	}
+
+}
+</code></pre>
+<h4 id="二-让一个类实现runnable接口">二、让一个类实现Runnable接口</h4>
+<ol>
+<li>创建一个类实现Runnable接口</li>
+<li>实现接口中的run方法</li>
+</ol>
+<pre><code class="language-java">public class MyRunnable implements Runnable {
+
+	@Override
+	public void run() {
+		System.out.println(&quot;我是一个子线程&quot;);
+		for(int i = 0; i &lt; 500000; i++) {
+			System.out.println(i);
+		}
+	}
+}
+</code></pre>
+<ol start="3">
+<li>创建实现类的对象</li>
+<li>实现类的对象作为Thread类的参数</li>
+<li>启动线程</li>
+</ol>
+<pre><code class="language-java">public class TestMultiplyThread3 {
+
+	public static void main(String[] args) {
+		Runnable mr = new MyRunnable();
+		Thread t = new Thread(mr);
+		t.start();
+		System.out.println(&quot;hello world&quot;);
+	}
+}
+</code></pre>
+<hr>
+<p>匿名类的写法：</p>
+<pre><code class="language-java">public class TestMultiplyThread3 {
+
+	public static void main(String[] args) {
+//		Runnable mr = new MyRunnable();
+		Runnable mr = new Runnable() {
+			@Override
+			public void run() {
+				System.out.println(&quot;我是一个子线程&quot;);
+				for(int i = 0; i &lt; 500000; i++) {
+					System.out.println(i);
+				}
+			}
+		};
+		Thread t = new Thread(mr);
+		t.start();
+		System.out.println(&quot;hello world&quot;);
+	}
+}
+</code></pre>
+<hr>
+<p>lambda表达式写法：</p>
+<pre><code class="language-java">public class TestMultiplyThread3 {
+
+	public static void main(String[] args) {
+
+		Runnable mr = () -&gt; {
+			System.out.println(&quot;我是一个子线程&quot;);
+			for(int i = 0; i &lt; 500000; i++) {
+				System.out.println(i);
+			}
+		};
+		Thread t = new Thread(mr);
+		t.start();
+		System.out.println(&quot;hello world&quot;);
+	}
+}
+</code></pre>
+<h3 id="多线程的常用方法">多线程的常用方法</h3>
+<p>currentThread() 获取当前线程对象。  <strong>类方法</strong></p>
+<p>setName(String name) 设置线程的名字。</p>
+<p>getName() 获取线程的名字。</p>
+<p>setPriority(int priority) 设置线程的优先级。 优先级的取值范围[1,10],默认是5</p>
+<p>getPriority() 获取线程的优先级。</p>
+<p>getState() 获取线程的状态</p>
+<p>join() 执行该线程，会阻塞当前线程。</p>
+<p>sleep(long millis) 休眠指定时间（单位毫秒），会阻塞当前线程。<strong>类方法</strong></p>
+<p>start() 启动线程</p>
+<p>yield() 暂定该线程的执行，交出CPU的使用权。</p>
+<h3 id="线程的同步">线程的同步</h3>
+<h4 id="什么是线程的同步">什么是线程的同步？</h4>
+<p>并行指的是线程同时执行。</p>
+<p>同步不是线程同时执行，而是线程不同时执行。同步本质指的是数据的同步。一般情况下，线程之间是相互独立，如果都去访问同一个变量，极有可能让这个数据变乱。如果不想让数据变乱，应在不让他们同时访问同一个变量。这个控制过程称为线程同步。</p>
+<h4 id="如何实现线程的同步">如何实现线程的同步？</h4>
+<h4 id="一-同步代码块">一、同步代码块</h4>
+<pre><code class="language-java">synchronized(对象){
+	共享资源//我们所谓的那个变量。
+}
+</code></pre>
+<p>示例代码：</p>
+<pre><code class="language-java">public class SellWindow implements Runnable {
+	
+	private int tickets = 100;
+	private Object lock = new Object();
+	
+	@Override
+	public void run() {
+		while(tickets &gt; 0) {
+			String threadName = Thread.currentThread().getName();
+			synchronized (lock) {
+				tickets--;
+				if(tickets &gt;= 0) {
+					System.out.println(threadName + &quot;卖掉1张票，剩余&quot; + tickets);
+				}
+			}
+		}
+	}
+
+}
+</code></pre>
+<blockquote>
+<p>同步代码块synchronized (对象)，多个线程要公用同一个对象，才能真正意义上加上锁。对象没有特殊要求，可以是任何继承于Object类的对象。包括this</p>
+</blockquote>
+<h4 id="二-同步方法">二、同步方法</h4>
+<p>被synchronized修饰的方法称为同步方法。</p>
+<pre><code class="language-java">public class SellWindow3 implements Runnable {
+	
+	private int tickets = 100; 
+	
+	@Override
+	public void run() {
+		while(tickets &gt; 0) {
+			
+			//method();
+			method2();
+		}
+	}
+	
+	public void method() {
+		synchronized (this) {
+			tickets--;
+			String threadName = Thread.currentThread().getName();
+			if(tickets &gt;= 0) {
+				System.out.println(threadName + &quot;卖掉1张票，剩余&quot; + tickets);
+			}
+		}
+	}
+
+	public synchronized void method2() {
+		tickets--;
+		String threadName = Thread.currentThread().getName();
+		if(tickets &gt;= 0) {
+			System.out.println(threadName + &quot;卖掉1张票，剩余&quot; + tickets);
+		}
+	}
+}
+</code></pre>
+<h4 id="使用锁对象上锁和解锁">使用锁对象上锁和解锁</h4>
+<pre><code class="language-java">public class SellWindow4 implements Runnable {
+
+	private int tickets = 100;
+	Lock lock = new ReentrantLock();
+	@Override
+	public void run() {
+		while (tickets &gt; 0) {
+			String threadName = Thread.currentThread().getName();
+			lock.lock();
+			tickets--;
+			if (tickets &gt;= 0) {
+				System.out.println(threadName + &quot;卖掉1张票，剩余&quot; + tickets);
+			}
+			lock.unlock();
+		}
+	}
+}
+</code></pre>
+<h4 id="线程同步小节">线程同步小节</h4>
+<p>同步不是线程同时执行，而是线程不同时执行。同步本质指的是数据的同步。一般情况下，线程之间是相互独立，如果都去访问同一个变量，极有可能让这个数据变乱。如果不想让数据变乱，应在不让他们同时访问同一个变量。这个控制过程称为线程同步。</p>
+<p>在开发中，如果多个线程访问一个资源（某变量），为了保证数据的正确性，可以使用3种方式来实现线程同步：使用synchronized(){}代码块，使用synchronized方法，或者给共享资源加锁和解锁。</p>
+<h3 id="线程通信">线程通信</h3>
+<h4 id="什么是线程通信">什么是线程通信？</h4>
+<p>不同线程之间可以相互的发信号。这就是线程通信。之所以需要进行线程通信，是因为有些时候，一个线程的执行需要依赖另外一个线程的执行结果。在结果到来之前，让线程等待（wait），有了结果只之后再进行后续的操作。对于另外一个线程而言，计算完结果，通知（notify）一下处于等待状态的线程.</p>
+<p>线程通信借助的是Object类的wait，notify，nitifyall方法。</p>
+<p>wait作用是让当前线程阻塞，阻塞多久，取决于有没有其他线程唤醒它。</p>
+<p>notify作用是唤醒处于wait状态的线程。必须是同一个监视器下的线程。</p>
+<p>notifyall作用是唤醒所有处于wait状态的线程。必须是同一个监视器下的线程。</p>
+<p>一般情况下，多线程里会出现线程同步的问题，我们不但要进行线程通信，还要解决线程同步的问题。</p>
+<h4 id="生产者-消费者模式">生产者-消费者模式</h4>
+<p>这是一个比较经典的多线程场景。有商品的时候，消费者才可以消费，没有商品的时候，消费者等待。商品库存充足的时候，生产者等待，库存不满的时候，生产者生产商品。</p>
+<pre><code class="language-java">public class Saler {//售货员类
+	private int productCount = 10;	//商品数量
+	public synchronized void stockGoods() {
+		if(productCount &lt; 2000) {
+			productCount++;
+			System.out.println(Thread.currentThread().getName() + &quot;生产了1件商品，库存是：&quot; + productCount);
+			this.notifyAll();
+		}else {
+			System.out.println(&quot;库存满了&quot;);
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public synchronized void sellGoods() {
+		if(productCount &gt; 0) {
+			productCount--;
+			System.out.println(Thread.currentThread().getName() + &quot;购买了1件商品，库存剩余：&quot; + productCount);
+			 
+			this.notifyAll();
+		}else {
+			System.out.println(&quot;库存不足&quot;);
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+</code></pre>
+<pre><code class="language-java">public class Productor implements Runnable{//生产者类
+	private Saler s;
+
+	public Productor(Saler s) {
+		super();
+		this.s = s;
+	}
+
+	@Override
+	public void run() {
+		while(true) {
+			s.stockGoods();
+		}
+	}
+	
+}
+</code></pre>
+<pre><code class="language-java">public class Customer implements Runnable{//消费者类
+
+	private Saler s;
+	
+	
+	public Customer(Saler s) {
+		super();
+		this.s = s;
+	}
+
+
+	@Override
+	public void run() {
+		while(true) {
+			s.sellGoods();
+		}
+	}
+	
+}
+</code></pre>
+<pre><code class="language-java">public class TestTread {
+
+	public static void main(String[] args) {
+		//生产者-消费者模式。模拟生产和消费过程
+		Saler s = new Saler();
+		Customer c = new Customer(s);
+		Productor p = new Productor(s);
+		Thread t1 = new Thread(c, &quot;客户1&quot;);
+		t1.start();
+		Thread t2 = new Thread(p,&quot;厂家&quot;);
+		t2.start();
+		Customer c2 = new Customer(s);
+		Thread t3 = new Thread(c2, &quot;客户2&quot;);
+		t3.start();
+	}
+
+}
+</code></pre>
+<h3 id="线程的生命周期">线程的生命周期</h3>
+<p>线程的生命周期指的是线程从创建到销毁的过程。在整个过程中，不同的时期线程有不同的状态。而且在程序运行期间会发生状态的转换。</p>
+<p>官方定义的线程状态如下：</p>
+<p>NEW：新建状态，指的是线程已经创建，但是尚未start()。</p>
+<p>RUNNABLE：可运行状态（已经调用了start方法），已经准备就绪，一旦抢到CPU就立即执行。</p>
+<p>BLOCKED：阻塞状态，处于阻塞状态的线程正在等待进入Synchronized块（或方法）。</p>
+<p>WAITING：等待状态，等待其他线程执行任务。直到其他线程任务结束或者收到notify信号。</p>
+<p>TIMED-WAITING：等待状态，限定时间的等待状态。</p>
+<p>TERMINATED：终止状态。线程要运行的任务已经结束。</p>
+<p><strong>生活中程序员会把线程划分为如下状态：</strong></p>
+<p>NEW：新建状态，指的是线程已经创建，但是尚未start()。</p>
+<p>RUNNABLE：可运行状态（已经调用start方法），已经准备就绪，一旦抢到CPU就立即执行。</p>
+<p>RUNNING：正在运行状态，已经抢到CPU，正在执行代码片段。</p>
+<p>BLOCKED：阻塞状态。</p>
+<p>DEAD：死亡状态。线程的任务已经结束。</p>
+<h4 id="线程的状态转换">线程的状态转换</h4>
+<figure data-type="image" tabindex="1"><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1565937300327&amp;di=741f64597befa4cfdb89275df082bf36&amp;imgtype=0&amp;src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-d7916ca1a2f89e9d1a02954bc110e91d_b.jpg" alt="线程的状态转换"></figure>
+<h3 id="线程池">线程池</h3>
+<h4 id="什么是线程池">什么是线程池？</h4>
+<p>水池：存放水的池子。</p>
+<p>线程池：存放线程的池子。</p>
+<p>Java中的线程池：是一个管理线程的池子。可以在需要的时候开辟线程，可以控制最大开辟的线程个数，可以在不需要的时候关闭线程，可以让任务排队执行。这些管理过程不需要我们干预，线程池能帮我们完成。我们所要做的就是往线程池中放任务。</p>
+<h4 id="为什么要有线程池">为什么要有线程池？</h4>
+<p>多线程解决了任务并发问题，但是开辟和关闭线程很消耗系统的性能，开辟和关闭一个线程要处理很多细节，频繁的开辟和关闭线程会给系统增加很多开销。</p>
+<p>线程池使用了重用的概念，可以控制线程开辟的数量，复用这些线程执行任务。这样就不用频繁的开辟和关闭线程了。</p>
+<h4 id="线程池的使用">线程池的使用</h4>
+<pre><code class="language-java">public class TestThreadPool {
+
+	public static void main(String[] args) {
+		
+		ThreadPoolExecutor pool = new ThreadPoolExecutor(10, 20, 2, TimeUnit.SECONDS, new ArrayBlockingQueue&lt;&gt;(3),new ThreadPoolExecutor.DiscardPolicy());
+		//pool.allowCoreThreadTimeOut(false);
+		pool.submit(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println(&quot;我是一个任务&quot;+Thread.currentThread().getName());
+			}
+		});
+		for(int i = 0; i &lt; 200; i++) {
+			pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					System.out.println(&quot;我是另外一个任务&quot;+Thread.currentThread().getName());
+				}
+			});
+		}
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(pool.getPoolSize());
+	}
+
+}
+</code></pre>
+<p>pool可以指定核心线程的个数，最大允许的线程的个数，超过核心线程数以后，多久关闭线程，任务队列，以及任务拒绝的机制。</p>
+<h4 id="线程池工具类">线程池工具类</h4>
+<p>Exectors 是线程池工具类，可以帮我们快速构建线程池。</p>
+<p>三种常见的线程池：</p>
+<ol>
+<li>固定线程个数的线程池</li>
+<li>不限线程个数的线程池</li>
+<li>单个线程的线程池（串行任务池）</li>
+</ol>
+<pre><code class="language-java">public class TestExecutors {
+
+	public static void main(String[] args) {
+		ExecutorService es = Executors.newFixedThreadPool(3);
+//		ExecutorService es = Executors.newCachedThreadPool();
+//		ExecutorService es = Executors.newSingleThreadExecutor();
+		es.submit(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println(Thread.currentThread().getName());
+				
+			}
+		});
+	}
+}
+
+</code></pre>
 ]]></content>
     </entry>
     <entry>
