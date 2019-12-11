@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zjt-zjt.github.io</id>
     <title>Gridea</title>
-    <updated>2019-12-11T11:09:58.215Z</updated>
+    <updated>2019-12-11T11:15:12.330Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zjt-zjt.github.io"/>
     <link rel="self" href="https://zjt-zjt.github.io/atom.xml"/>
@@ -11,35 +11,616 @@
     <icon>https://zjt-zjt.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://zjt-zjt.github.io/post/hello-gridea</id>
-        <link href="https://zjt-zjt.github.io/post/hello-gridea">
+        <title type="html"><![CDATA[Mybatis]]></title>
+        <id>https://zjt-zjt.github.io/post/mybatis</id>
+        <link href="https://zjt-zjt.github.io/post/mybatis">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2019-04-17T09:05:51.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<h2 id="mybatis介绍">Mybatis介绍</h2>
+<h2 id="mybatis简单使用">Mybatis简单使用</h2>
+<ol>
+<li>
+<p>初始化SqlSessionFactory对象</p>
+<p>SqlSessionFactory对象需要从一个核心配置文件中构建，因此我们创建SqlSessionFactory对象之前需要先配置一个Mybatis核心配置文件</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+    &lt;!-- 引入外部properties文件,路径从类路径的根目录开始 --&gt;
+    &lt;properties resource=&quot;jdbc.properties&quot; /&gt;
+
+    &lt;settings&gt;
+        &lt;!-- 开启将数据库中下划线连接的字段自动映射为Java的小驼峰命名 --&gt;
+        &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+    &lt;/settings&gt;
+
+    &lt;!-- 定义类型别名，在xxxMapper.xml文件中就可以用别名代替很长的类名 --&gt;
+    &lt;typeAliases&gt;
+        
+            &lt;!-- 单个类配置别名 --&gt;
+&lt;!--        &lt;typeAlias type=&quot;com.lanou3g.mybatis.bean.User&quot; alias=&quot;User&quot; /&gt;--&gt;
+        
+            &lt;!-- 统一配置某个包下所有类的别名, 会使用 Bean 的首字母小写的类名来作为它的别名。 --&gt;
+        &lt;package name=&quot;com.lanou3g.mybatis.bean&quot; /&gt;
+    &lt;/typeAliases&gt;
+
+
+    &lt;!-- 配置不同环境的参数 --&gt;
+    &lt;environments default=&quot;development&quot;&gt;
+        &lt;!-- 开发环境数据库、事务配置 --&gt;
+        &lt;environment id=&quot;development&quot;&gt;
+            &lt;!-- 事务管理使用JDBC的事务 --&gt;
+            &lt;transactionManager type=&quot;JDBC&quot;/&gt;
+            &lt;!-- 配置开发环境数据源 --&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot;/&gt;
+                &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot;/&gt;
+                &lt;property name=&quot;username&quot; value=&quot;${jdbc.user}&quot;/&gt;
+                &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
+                &lt;!-- 将所有driver.开头的参数，附加到url属性的值后面上 --&gt;
+                &lt;property name=&quot;driver.characterEncoding&quot; value=&quot;utf8&quot;/&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+    &lt;/environments&gt;
+
+    &lt;!-- 将mapper SQL映射文件包含进来 --&gt;
+    &lt;mappers&gt;
+        &lt;!-- 将通过XML方式配置的mapper引入进来 --&gt;
+        &lt;mapper resource=&quot;mapper/userMapper.xml&quot;/&gt;
+        &lt;!-- 将通过注解方式配置的mapper引入进来 --&gt;
+&lt;!--        &lt;mapper class=&quot;com.lanou3g.mybatis.mapper.UserMapper&quot; /&gt;--&gt;
+
+        &lt;!-- 将com.lanou3g.mybatis.mapper包下所有通过注解方式配置的mapper引入进来 --&gt;
+&lt;!--        &lt;package name=&quot;com.lanou3g.mybatis.mapper&quot;/&gt;--&gt;
+    &lt;/mappers&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>构建对象</p>
+<pre><code class="language-java">// 1. 初始化mybatis配置
+String confPath = &quot;mybatis_conf.xml&quot;;
+InputStream in = Resources.getResourceAsStream(confPath);
+
+// 2. 构建SqlSessionFactory对象
+SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+</code></pre>
+</li>
+<li>
+<p>创建SqlSession对象</p>
+<p>通过上一步的SqlSessionFactory对象可以获取到负责执行SQL语句的SqlSession对象</p>
+<pre><code class="language-java">// 3. 获取SqlSession对象，默认事务不自动提交
+// SqlSession sqlSession = sqlSessionFactory.openSession();
+// 获取一个自动提交事务的sqlSession
+SqlSession sqlSession = sqlSessionFactory.openSession(true);
+</code></pre>
+</li>
+<li>
+<p>用SqlSession对象从Mybatis中获取Mapper接口的实现类</p>
+<pre><code class="language-java">// 4. 获取Mapper
+UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+</code></pre>
+</li>
+<li>
+<p>编写Mapper对象的xml配置文件</p>
+<p>XML格式的Mapper配置文件类似于接口的实现类，它指定了具体要执行的SQL语句，以及结果集如何映射。</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.lanou3g.mybatis.mapper.UserMapper&quot;&gt;
+    &lt;select id=&quot;queryAllUser&quot; resultType=&quot;user&quot;&gt;
+        select * from user
+     &lt;/select&gt;
+
+    &lt;insert id=&quot;insertUser&quot;&gt;
+      insert into user (username,nick_name,email)
+      values (#{username},#{nickName},#{email})
+    &lt;/insert&gt;
+&lt;/mapper&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="深入了解mybatis">深入了解Mybatis</h2>
+<h3 id="主要组件">主要组件</h3>
+<h4 id="核心配置文件">核心配置文件</h4>
+<p>核心配置文件是Mybatis的入口，它里面可以配置mybatis的具体参数、数据源、类型别名、关联映射文件等。。</p>
+<p>具体的参数配置说明参见：</p>
+<p><a href="https://mybatis.org/mybatis-3/zh/configuration.html">Mybatis3核心配置文件官方说明</a></p>
+<h4 id="sqlsessionfactory">SqlSessionFactory</h4>
+<p>一个SqlSessionFactory只能连接一个数据库实例，如果需要连接多个数据库，需要构建多个SqlSessionFactory对象。</p>
+<p>在构建SqlSesssionFactory时可以指定environment的id，表示使用指定的数据源来构建factory对象</p>
+<pre><code class="language-java">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in, &quot;dev&quot;);
+</code></pre>
+<h4 id="sqlsession">SqlSession</h4>
+<p>一个SqlSession对象代表一次到数据的会话，该对象有一下功能：</p>
+<ul>
+<li>获取Mapper实现类</li>
+<li>管理事务操作</li>
+</ul>
+<blockquote>
+<p>注意： SqlSession对象是非线程安全的，在多线程环境下，建议不要作为类的实例属性来用。</p>
+</blockquote>
+<h4 id="mapper">Mapper</h4>
+<ul>
+<li>
+<p>Mapper接口类</p>
+<p>定义了增删盖查的方法。注意，必须是接口类型，而且方法只需要定义就可以了。</p>
+</li>
+<li>
+<p>Mapper配置文件</p>
+<p>Mapper配置文件中就是负责实现接口中的方法，它定义了具体要执行什么SQL语句，如何映射结果集。</p>
+<ul>
+<li>配置文件中select、delete、update、insert标签的id必须是对应接口中的方法名。</li>
+<li>mapper文件的namespace属性需要对应Mapper接口的完全类型限定名。</li>
+</ul>
+</li>
+</ul>
+<h3 id="深入mybatis核心配置文件">深入Mybatis核心配置文件</h3>
+<p>具体的参数配置说明参见：</p>
+<p><a href="https://mybatis.org/mybatis-3/zh/configuration.html">Mybatis3核心配置文件官方说明</a></p>
+<h3 id="深入mybatis映射配置文件">深入Mybatis映射配置文件</h3>
+<h4 id="crud语句定义">CRUD语句定义</h4>
+<h5 id="查询语句">查询语句</h5>
+<p>接口中</p>
+<pre><code class="language-java">List&lt;User&gt; queryAllUser();
+
+User queryUserById(Integer id);
+</code></pre>
+<p>xml配置文件中</p>
+<pre><code class="language-xml">&lt;select id=&quot;queryAllUser&quot; resultType=&quot;user&quot;&gt;
+    select * from user
+&lt;/select&gt;
+
+&lt;select id=&quot;queryUserById&quot; resultType=&quot;user&quot;&gt;
+    select * from user where id = #{id}
+&lt;/select&gt;
+</code></pre>
+<h5 id="插入语句">插入语句</h5>
+<h6 id="普通插入语句">普通插入语句</h6>
+<p>接口中</p>
+<pre><code class="language-java">int insertUser(User user);
+</code></pre>
+<p>xml配置文件中</p>
+<pre><code class="language-xml">&lt;insert id=&quot;insertUser&quot;&gt;
+    insert into user (username,nick_name,email)
+    values (#{username},#{nickName},#{email})
+&lt;/insert&gt;
+</code></pre>
+<h6 id="如何返回数据库自增的id">如何返回数据库自增的ID</h6>
+<pre><code class="language-xml">&lt;!-- 给insert语句添加useGeneratedKeys、keyProperty后，mybatis会将自增的id值直接赋值到传进来的user对象的id属性上
+        useGeneratedKeys: 指定需要获取数据库自增的id
+        keyProperty: 指定自增地段的名称
+     --&gt;
+&lt;insert id=&quot;insertUser&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
+    insert into user (username,nick_name,email)
+    values (#{username},#{nickName},#{email})
+&lt;/insert&gt;
+</code></pre>
+<h5 id="删除语句">删除语句</h5>
+<p>接口中</p>
+<pre><code class="language-java">void deleteUserById(Integer id);
+</code></pre>
+<p>XML配置中</p>
+<pre><code class="language-xml">&lt;delete id=&quot;deleteUserById&quot;&gt;
+    delete from user where id = #{id}
+&lt;/delete&gt;
+</code></pre>
+<h5 id="更新语句">更新语句</h5>
+<p>接口中</p>
+<pre><code class="language-java">void updateUser(User user);
+</code></pre>
+<p>XML配置中</p>
+<pre><code class="language-xml">&lt;update id=&quot;updateUser&quot;&gt;
+    update user set password = #{password} where id = #{id}
+&lt;/update&gt;
+</code></pre>
+<h4 id="接口中的参数如果传递到sql中">接口中的参数如果传递到SQL中</h4>
+<h5 id="简单类型参数">简单类型参数</h5>
+<p>接口中：</p>
+<pre><code class="language-java">void deleteUserById(Integer id);
+</code></pre>
+<p>xml配置文件中：</p>
+<pre><code class="language-xml">&lt;delete id=&quot;deleteUserById&quot;&gt;
+    delete from user where id = #{id}
+&lt;/delete&gt;
+</code></pre>
+<h5 id="引用类型参数">引用类型参数</h5>
+<p>接口中：</p>
+<pre><code class="language-java">int insertUser(User user);
+</code></pre>
+<p>xml配置文件中：</p>
+<pre><code class="language-xml">&lt;!-- 给insert语句添加useGeneratedKeys、keyProperty后，mybatis会将自增的id值直接赋值到传进来的user对象的id属性上
+        useGeneratedKeys: 指定需要获取数据库自增的id
+        keyProperty: 指定自增地段的名称
+     --&gt;
+&lt;insert id=&quot;insertUser&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
+    insert into user (username,nick_name,email)
+    values (#{username},#{nickName},#{email})
+&lt;/insert&gt;
+</code></pre>
+<h5 id="当接口中参数和xml配置取值时名称不一样时">当接口中参数和XML配置取值时名称不一样时</h5>
+<p>在接口中的参数前加注解</p>
+<pre><code class="language-java">User queryUserById(@Param(&quot;id&quot;) Integer xxxxxxxId);
+</code></pre>
+<p>在XML中取值时用注解指定的名称</p>
+<pre><code class="language-xml">&lt;select id=&quot;queryUserById&quot; resultType=&quot;user&quot;&gt;
+    select * from user where id = #{id}
+&lt;/select&gt;
+</code></pre>
+<h5 id="与的区别">#{}与${}的区别</h5>
+<ul>
+<li>它俩都可以获取接口调用中传递过来的参数</li>
+<li>#{}会将参数作为占位符，使用预编译语句(PreparedStatement)执行</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow></mrow><mi mathvariant="normal">会</mi><mi mathvariant="normal">直</mi><mi mathvariant="normal">接</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">实</mi><mi mathvariant="normal">际</mi><mi mathvariant="normal">参</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">替</mi><mi mathvariant="normal">换</mi></mrow><annotation encoding="application/x-tex">{}会直接用实际参数替换</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord"></span><span class="mord cjk_fallback">会</span><span class="mord cjk_fallback">直</span><span class="mord cjk_fallback">接</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">实</span><span class="mord cjk_fallback">际</span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">换</span></span></span></span>{}， 参数可以作为SQL的一部分。</li>
+</ul>
+<p>比如，要实现下面的效果：</p>
+<p>Java代码</p>
+<pre><code class="language-java">List&lt;User&gt; queryAllUserOrderBy(String order);
+
+// 调用：
+mapper.queryAllUserOrderBy(&quot;last_login_time&quot;);
+</code></pre>
+<p>XML配置：</p>
+<pre><code class="language-xml">&lt;select id=&quot;queryAllUserOrderBy&quot; resultMap=&quot;userMap&quot;&gt;
+    select * from user order by ${order} desc;
+&lt;/select&gt;
+</code></pre>
+<p>如果上面使用#{order}取获取参数，最终执行的SQL会是这样：</p>
+<pre><code>==&gt;  Preparing: select * from user order by ? desc; 
+==&gt; Parameters: last_login_time(String)
+</code></pre>
+<p>无法实现排序效果</p>
+<p>如果使用${order}来取参数，最终执行SQL：</p>
+<pre><code>==&gt;  Preparing: select * from user order by last_login_time desc; 
+==&gt; Parameters: 
+</code></pre>
+<p>可以实现排序效果</p>
+<h4 id="结果集如何映射">结果集如何映射</h4>
+<h5 id="resulttype方式">ResultType方式</h5>
+<p>ResultType方式适用于数据库结果集可以直接映射成一个Java类的情况</p>
+<p>Java实体类：</p>
+<pre><code class="language-java">@Getter
+@Setter
+@ToString
+public class User {
+    private Integer id;
+    private String username;
+    private String nickName;
+    private String password;
+    private String email;
+    private Timestamp lastLoginTime;
+}
+</code></pre>
+<p>使用方法：</p>
+<pre><code class="language-xml">&lt;select id=&quot;queryAllUser&quot; resultType=&quot;com.lanou3g.bean.User&quot;&gt;
+    select * from user
+&lt;/select&gt;
+</code></pre>
+<h5 id="resultmap方式">ResultMap方式</h5>
+<p>ResultMap方式适用于复杂的结果集映射，比如数据库返回的结果集中的列名和JavaBean无法一一对应，或者对象间存在一对一、一对多关联映射时。</p>
+<h6 id="解决数据库列名与java类中属性名不一致的映射问题">解决数据库列名与Java类中属性名不一致的映射问题</h6>
+<pre><code class="language-xml">&lt;mapper&gt;
+    ...
+    &lt;resultMap id=&quot;userMap&quot; type=&quot;user&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;
+        &lt;result property=&quot;username&quot; column=&quot;username&quot; /&gt;
+        &lt;result property=&quot;lastLoginttime&quot; column=&quot;last_login_time&quot; /&gt;
+        &lt;result property=&quot;email&quot; column=&quot;email&quot; /&gt;
+        &lt;result property=&quot;nickName&quot; column=&quot;nick_name&quot; /&gt;
+    &lt;/resultMap&gt;
+    ...
+&lt;/mapper&gt;
+</code></pre>
+<p>在查询语句中将resultType换成resultMap</p>
+<pre><code class="language-xml">&lt;select id=&quot;queryAllUser&quot; resultMap=&quot;userMap&quot;&gt;
+    select * from user
+&lt;/select&gt;
+</code></pre>
+<blockquote>
+<p>其实，如果遇到单纯字段名和属性名不对应的情况，使用别名的方式更简单</p>
+</blockquote>
+<h6 id="解决一对一映射查询问题">解决一对一映射查询问题</h6>
+<h6 id="解决一对多映射查询问题">解决一对多映射查询问题</h6>
+<h4 id="动态sql">动态SQL</h4>
+<h5 id="条件分支sql">条件分支SQL</h5>
+<ul>
+<li>if</li>
+<li>choose&amp;when&amp;otherwise</li>
+</ul>
+<h5 id="循环sql">循环SQL</h5>
+<ul>
+<li>forEach</li>
+</ul>
+<h5 id="其他特殊sql">其他特殊SQL</h5>
+<ul>
+<li>where</li>
+<li>set</li>
+<li>trim</li>
+</ul>
+<h4 id="批量插入">批量插入</h4>
+<h5 id="通过foreach动态sql方式">通过forEach动态SQL方式</h5>
+<h6 id="实现原理">实现原理</h6>
+<p>forEach批量插入的原理是直接通过forEach动态标签，根据传过来的参数数量动态生成一个很长的SQL语句。一个语句就是一次批量插入。</p>
+<p>语句形如：</p>
+<pre><code class="language-sql">insert into user (username, age) values
+('张三', 10),
+('李四', 10),
+('王五', 10),
+('赵六', 10),
+('盖聂', 9000)
+
+# 上面的语句一次会插入5条数据
+</code></pre>
+<p>我们需要做的就是生成此语句就可以了。</p>
+<h6 id="具体做法">具体做法</h6>
+<p>Mapper接口</p>
+<pre><code class="language-java">int batchInsertUser(List&lt;User&gt; userList);
+</code></pre>
+<p>Mapper映射文件</p>
+<pre><code class="language-xml">&lt;insert id=&quot;batchInsertUser&quot;&gt;
+	insert into user (username, age) values
+    &lt;forEach collection=&quot;list&quot; item=&quot;user&quot; separator=&quot;,&quot;&gt;
+    	(#{user.username}, #{user.age})
+    &lt;/forEach&gt;
+&lt;/insert&gt;
+</code></pre>
+<h5 id="通过executorbatch的方式">通过Executor.BATCH的方式</h5>
+<h6 id="实现原理-2">实现原理</h6>
+<p>这种批量插入在底层的Mapper接口和Mapper映射文件中，都只是一个普通插入单条数据的写法。它通过在上层获取SqlSession时，指定执行类型是批量ExcecutorType.BATCH的方式，实现每次执行完单条插入以后并没有真正写入数据库，只有当调用sqlSession.flushStatement()时，才会将这一批数据一次性写入数据库，从而实现批量操作。</p>
+<h6 id="使用步骤">使用步骤</h6>
+<ol>
+<li>
+<p>获取SqlSession时指定执行类型为批量</p>
+<pre><code class="language-java">// 获取一个批量执行的sqlSession对象
+SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
+</code></pre>
+</li>
+<li>
+<p>Mapper接口和Mapper映射文件中只需按照单条插入去写方法和SQL语句即可</p>
+<p>Mapper接口</p>
+<pre><code class="language-java">int insertUser(User user);
+</code></pre>
+<p>XML映射文件</p>
+<pre><code class="language-xml">&lt;insert id=&quot;insertUser&quot;&gt;
+    insert into user (nick_name, status, createtime)
+    values
+    (#{nickName},#{status},#{createtime})
+&lt;/insert&gt;
+</code></pre>
+</li>
+<li>
+<p>空置批量的大小，在够一批数据时，调用<code>sqlSession.flushStatement()</code>去整体往数据库写一次</p>
+<pre><code class="language-java">int batchSize = 100;
+int count = 0;
+List&lt;BatchResult&gt; resultList = new ArrayList&lt;&gt;();
+for(User user : userList) {
+    // ExecutorType.Batch方式这里返回的不是影响的条数，具体获取方法参见下面代码
+    mapper.insertUser(user);
+    count++;
+    if(count % batchSize == 0) {
+        resultList.addAll(sqlSession.flushStatements());
+    }
+}
+if(count % batchSize != 0) {
+    resultList.addAll(sqlSession.flushStatements());
+}
+</code></pre>
+</li>
+<li>
+<p>获取影响的条数</p>
+<p>这种方式获取影响条数没有那么直接，需要去API返回的BatchResult对象中读取updateCounts方法才能拿到。</p>
+<pre><code class="language-java">int rows = 0;
+for(BatchResult batchResult : resultList) {
+    int[] updateCounts = batchResult.getUpdateCounts();
+    for(int updateCount : updateCounts) {
+        rows += updateCount;
+    }
+}
+System.out.println(&quot;批量插入成功，响应的行数：&quot; + rows);
+</code></pre>
+</li>
+</ol>
+<h4 id="缓存">缓存</h4>
+<h5 id="一级缓存本地缓存">一级缓存（本地缓存）</h5>
+<p>Mybatis的一级缓存是指Session缓存。一级缓存的作用域默认是一个SqlSession。Mybatis默认开启一级缓存。<br>
+也就是在同一个SqlSession中，执行相同的查询SQL，第一次会去数据库进行查询，并写到缓存中；<br>
+第二次以后是直接去缓存中取。<br>
+当执行SQL查询中间发生了增删改的操作，MyBatis会把SqlSession的缓存清空。</p>
+<blockquote>
+<p>问题： 如果增删改的表和缓存的表是毫不相干的两个表，是否会清空缓存？</p>
+</blockquote>
+<h6 id="测试方法">测试方法</h6>
+<ol>
+<li>我们在一个 sqlSession 中，对 User 表根据id进行两次查询，查看他们发出sql语句的情况</li>
+</ol>
+<pre><code class="language-java">@Test
+public void testSelectOrderAndUserByOrderId(){
+    //根据 sqlSessionFactory 产生 session
+    SqlSession sqlSession = sessionFactory.openSession();
+    String statement = &quot;one.to.one.mapper.OrdersMapper.selectOrderAndUserByOrderID&quot;;
+    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+    //第一次查询，发出sql语句，并将查询的结果放入缓存中
+    User u1 = userMapper.selectUserByUserId(1);
+    System.out.println(u1);
+     
+    //第二次查询，由于是同一个sqlSession,会在缓存中查找查询结果
+    //如果有，则直接从缓存中取出来，不和数据库进行交互
+    User u2 = userMapper.selectUserByUserId(1);
+    System.out.println(u2);
+     
+    sqlSession.close();
+}
+</code></pre>
+<ol start="2">
+<li>同样是对user表进行两次查询，只不过两次查询之间进行了一次update操作。</li>
+</ol>
+<pre><code class="language-java">@Test
+public void testSelectOrderAndUserByOrderId(){
+    //根据 sqlSessionFactory 产生 session
+    SqlSession sqlSession = sessionFactory.openSession();
+    String statement = &quot;one.to.one.mapper.OrdersMapper.selectOrderAndUserByOrderID&quot;;
+    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+    //第一次查询，发出sql语句，并将查询的结果放入缓存中
+    User u1 = userMapper.selectUserByUserId(1);
+    System.out.println(u1);
+     
+    //第二步进行了一次更新操作，sqlSession.commit()
+    u1.setSex(&quot;女&quot;);
+    userMapper.updateUserByUserId(u1);
+    sqlSession.commit();
+     
+    //第二次查询，由于是同一个sqlSession.commit(),会清空缓存信息
+    //则此次查询也会发出 sql 语句
+    User u2 = userMapper.selectUserByUserId(1);
+    System.out.println(u2);
+     
+    sqlSession.close();
+}
+</code></pre>
+<h5 id="如何禁用一级缓存">如何禁用一级缓存</h5>
+<ul>
+<li>在映射文件中给对应的select标签上添加<code>flushCache=&quot;true&quot;</code>属性</li>
+<li>在核心配置文件中将localCacheScope设置成STATEMENT（默认值是SESSION）</li>
+</ul>
+<h5 id="二级缓存全局缓存">二级缓存（全局缓存）</h5>
+<h6 id="什么是二级缓存">什么是二级缓存？</h6>
+<p>Mybatis中二级缓存相比一级（本地）缓存来说是一个作用域更大的缓存方案。 二级缓存的作用域可以跨多个SqlSession，只要是同一个namespace下的mapper映射文件都可以共享缓存。但是不能跨SqlSessionFactory。</p>
+<p>Mybatis二级缓存需要手动开启。</p>
+<h6 id="开启二级缓存的方法">开启二级缓存的方法</h6>
+<p>1.在 SqlMapConfig.xml 文件开启二级缓存</p>
+<pre><code class="language-xml">&lt;settings&gt; 
+    &lt;!-- 开启全局二级缓存的支持 --&gt;  
+    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt; 
+&lt;/settings&gt; 
+</code></pre>
+<p>2.配置相关的 Mapper 映射文件 (因为二级缓存就是针对特定的mapper namespace的)</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
+&lt;!DOCTYPE mapper     
+PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;     
+&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt; 
+&lt;mapper namespace=&quot;com.itheima.dao.IUserDao&quot;&gt;  
+    &lt;!-- 开启二级缓存的支持 --&gt;  
+    &lt;cache /&gt;
+&lt;/mapper&gt;
+</code></pre>
+<blockquote>
+<p><cache>标签表示当前这个 mapper 映射将使用二级缓存，能否命中二级缓存就看多次查询是否属于同一个namespace。</p>
+</blockquote>
+<ol start="3">
+<li>设置某个特定的查询语句不用二级缓存</li>
+</ol>
+<pre><code class="language-xml">&lt;!-- 根据 id 查询 --&gt; 
+&lt;select id=&quot;findById&quot; resultType=&quot;user&quot; parameterType=&quot;int&quot; useCache=&quot;false&quot;&gt;  
+    select * from user where id = #{uid} 
+&lt;/select&gt; 
+</code></pre>
+<blockquote>
+<p>注意： 如果mapper文件中没有开启 <cache /> 仅在语句上添加useCache=&quot;true&quot;是无法开启二级缓存的。这个属性本意是用来关闭特定查询的二级缓存。</p>
+</blockquote>
+<h6 id="二级缓存注意事项">二级缓存注意事项</h6>
+<blockquote>
+<p>当我们在使用二级缓存时，所缓存的类一定要实现 java.io.Serializable 接口，这种就可以使用序列化 方式来保存对象。</p>
+</blockquote>
+<pre><code class="language-java">public class User implements Serializable { }
+</code></pre>
+<h4 id="mybatis逆向工程">Mybatis逆向工程</h4>
+<h2 id="spring与mybatis整合">Spring与Mybatis整合</h2>
+<ol>
+<li>
+<p>加入依赖</p>
+<pre><code class="language-xml">&lt;!-- mybatis-spring整合依赖，这个是最主要的一个依赖 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+    &lt;version&gt;2.0.1&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!-- Spring和数据源相关依赖 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+    &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;druid&lt;/artifactId&gt;
+    &lt;version&gt;1.1.20&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</li>
+<li>
+<p>在Spring bean配置文件中配置Mybatis、Spring整合bean  SqlSessionFactoryBean</p>
+<pre><code class="language-xml">&lt;!-- 配置整合bean --&gt;
+&lt;bean id=&quot;sessionFactoryBean&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;!-- 数据源是必要参数 --&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+    &lt;!-- Mybatis核心配置文件其实大多数情况下都可以省略，通过指定属性可以间接设置核心配置文件中的参数 --&gt;
+    &lt;!--&lt;property name=&quot;configLocation&quot; value=&quot;mybatis_conf.xml&quot; /&gt;--&gt;
+
+    &lt;!-- 省略mybatis核心配置文件后，可以通过类似下面这些特定属性，设置mybatis参数 --&gt;
+    &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.lanou3g.mybatis.spring.bean&quot; /&gt;
+    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+</li>
+<li>
+<p>在Spring bean配置文件中开启Mybatis Mapper扫描</p>
+<ol>
+<li>
+<p>需要使用mybatis schema</p>
+<p>配置方法，在bean配置文件的头部添加</p>
+<pre><code class="language-xml">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mybatis=&quot;http://mybatis.org/schema/mybatis-spring&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://mybatis.org/schema/mybatis-spring
+        http://mybatis.org/schema/mybatis-spring.xsd&quot;&gt;
+</code></pre>
+</li>
+<li>
+<p>开启Mybatis Mapper扫描</p>
+<p>开启Mybatis Mapper扫描的作用是：告诉Mybatis要创建哪个包下接口的实现类，并以bean的方式加入到SpringIOC容器中</p>
+<pre><code class="language-xml">&lt;!-- 开启Mapper扫描，Mybatis会创建将此包下的接口的实现类，并以bean的方式加入到SpringIOC容器中 --&gt;
+&lt;mybatis:scan base-package=&quot;com.lanou3g.mybatis.spring.mapper&quot; /&gt;
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>创建实体类、mapper映射文件、Mapper接口（可以通过Mybatis逆向工程直接生成）</p>
+<p>Mapper接口</p>
+<pre><code class="language-java">@Repository	//此注解不是必须的，因为MessageMapper类的实现类是由Mybatis创建并放到ioc容器中的，不是由Spring来创建的。
+public interface MessageMapper {
+    int insert(Message record);
+    List&lt;Message&gt; selectAll();
+}
+</code></pre>
+<p>实体类、映射文件 略</p>
+</li>
+<li>
+<p>将Mapper接口用Spring自动注入的方式注入到需要的地方使用</p>
+<p>MessageService.java</p>
+<pre><code class="language-java">@Service
+public class MessageService {
+    @Autowired
+    MessageMapper messageMapper;
+    public List&lt;Message&gt; queryAllMessage() {
+        return messageMapper.selectAll();
+    }
+}
+</code></pre>
+</li>
+</ol>
 ]]></content>
     </entry>
     <entry>
@@ -47,7 +628,7 @@
         <id>https://zjt-zjt.github.io/post/springmvc-xue-xi-bi-ji</id>
         <link href="https://zjt-zjt.github.io/post/springmvc-xue-xi-bi-ji">
         </link>
-        <updated>2018-11-08T13:28:02.000Z</updated>
+        <updated>2019-03-08T13:28:02.000Z</updated>
         <summary type="html"><![CDATA[<!-- SpringMVC 第一天 -->
 <h2 id="mvc设计模式">MVC设计模式</h2>
 <p>其实在之前JavaWeb阶段我们已经接触到了MVC模式。</p>
@@ -797,616 +1378,35 @@ public class NotAllowedInterceptor implements HandlerInterceptor {
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Mybatis]]></title>
-        <id>https://zjt-zjt.github.io/post/mybatis</id>
-        <link href="https://zjt-zjt.github.io/post/mybatis">
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://zjt-zjt.github.io/post/hello-gridea</id>
+        <link href="https://zjt-zjt.github.io/post/hello-gridea">
         </link>
-        <updated>2018-10-17T09:05:51.000Z</updated>
-        <content type="html"><![CDATA[<!-- more -->
-<h2 id="mybatis介绍">Mybatis介绍</h2>
-<h2 id="mybatis简单使用">Mybatis简单使用</h2>
-<ol>
-<li>
-<p>初始化SqlSessionFactory对象</p>
-<p>SqlSessionFactory对象需要从一个核心配置文件中构建，因此我们创建SqlSessionFactory对象之前需要先配置一个Mybatis核心配置文件</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE configuration
-        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
-        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
-&lt;configuration&gt;
-    &lt;!-- 引入外部properties文件,路径从类路径的根目录开始 --&gt;
-    &lt;properties resource=&quot;jdbc.properties&quot; /&gt;
-
-    &lt;settings&gt;
-        &lt;!-- 开启将数据库中下划线连接的字段自动映射为Java的小驼峰命名 --&gt;
-        &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
-    &lt;/settings&gt;
-
-    &lt;!-- 定义类型别名，在xxxMapper.xml文件中就可以用别名代替很长的类名 --&gt;
-    &lt;typeAliases&gt;
-        
-            &lt;!-- 单个类配置别名 --&gt;
-&lt;!--        &lt;typeAlias type=&quot;com.lanou3g.mybatis.bean.User&quot; alias=&quot;User&quot; /&gt;--&gt;
-        
-            &lt;!-- 统一配置某个包下所有类的别名, 会使用 Bean 的首字母小写的类名来作为它的别名。 --&gt;
-        &lt;package name=&quot;com.lanou3g.mybatis.bean&quot; /&gt;
-    &lt;/typeAliases&gt;
-
-
-    &lt;!-- 配置不同环境的参数 --&gt;
-    &lt;environments default=&quot;development&quot;&gt;
-        &lt;!-- 开发环境数据库、事务配置 --&gt;
-        &lt;environment id=&quot;development&quot;&gt;
-            &lt;!-- 事务管理使用JDBC的事务 --&gt;
-            &lt;transactionManager type=&quot;JDBC&quot;/&gt;
-            &lt;!-- 配置开发环境数据源 --&gt;
-            &lt;dataSource type=&quot;POOLED&quot;&gt;
-                &lt;property name=&quot;driver&quot; value=&quot;${jdbc.driver}&quot;/&gt;
-                &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot;/&gt;
-                &lt;property name=&quot;username&quot; value=&quot;${jdbc.user}&quot;/&gt;
-                &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;/&gt;
-                &lt;!-- 将所有driver.开头的参数，附加到url属性的值后面上 --&gt;
-                &lt;property name=&quot;driver.characterEncoding&quot; value=&quot;utf8&quot;/&gt;
-            &lt;/dataSource&gt;
-        &lt;/environment&gt;
-    &lt;/environments&gt;
-
-    &lt;!-- 将mapper SQL映射文件包含进来 --&gt;
-    &lt;mappers&gt;
-        &lt;!-- 将通过XML方式配置的mapper引入进来 --&gt;
-        &lt;mapper resource=&quot;mapper/userMapper.xml&quot;/&gt;
-        &lt;!-- 将通过注解方式配置的mapper引入进来 --&gt;
-&lt;!--        &lt;mapper class=&quot;com.lanou3g.mybatis.mapper.UserMapper&quot; /&gt;--&gt;
-
-        &lt;!-- 将com.lanou3g.mybatis.mapper包下所有通过注解方式配置的mapper引入进来 --&gt;
-&lt;!--        &lt;package name=&quot;com.lanou3g.mybatis.mapper&quot;/&gt;--&gt;
-    &lt;/mappers&gt;
-&lt;/configuration&gt;
-</code></pre>
-<p>构建对象</p>
-<pre><code class="language-java">// 1. 初始化mybatis配置
-String confPath = &quot;mybatis_conf.xml&quot;;
-InputStream in = Resources.getResourceAsStream(confPath);
-
-// 2. 构建SqlSessionFactory对象
-SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
-</code></pre>
-</li>
-<li>
-<p>创建SqlSession对象</p>
-<p>通过上一步的SqlSessionFactory对象可以获取到负责执行SQL语句的SqlSession对象</p>
-<pre><code class="language-java">// 3. 获取SqlSession对象，默认事务不自动提交
-// SqlSession sqlSession = sqlSessionFactory.openSession();
-// 获取一个自动提交事务的sqlSession
-SqlSession sqlSession = sqlSessionFactory.openSession(true);
-</code></pre>
-</li>
-<li>
-<p>用SqlSession对象从Mybatis中获取Mapper接口的实现类</p>
-<pre><code class="language-java">// 4. 获取Mapper
-UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-</code></pre>
-</li>
-<li>
-<p>编写Mapper对象的xml配置文件</p>
-<p>XML格式的Mapper配置文件类似于接口的实现类，它指定了具体要执行的SQL语句，以及结果集如何映射。</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE mapper
-        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
-        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-&lt;mapper namespace=&quot;com.lanou3g.mybatis.mapper.UserMapper&quot;&gt;
-    &lt;select id=&quot;queryAllUser&quot; resultType=&quot;user&quot;&gt;
-        select * from user
-     &lt;/select&gt;
-
-    &lt;insert id=&quot;insertUser&quot;&gt;
-      insert into user (username,nick_name,email)
-      values (#{username},#{nickName},#{email})
-    &lt;/insert&gt;
-&lt;/mapper&gt;
-</code></pre>
-</li>
-</ol>
-<h2 id="深入了解mybatis">深入了解Mybatis</h2>
-<h3 id="主要组件">主要组件</h3>
-<h4 id="核心配置文件">核心配置文件</h4>
-<p>核心配置文件是Mybatis的入口，它里面可以配置mybatis的具体参数、数据源、类型别名、关联映射文件等。。</p>
-<p>具体的参数配置说明参见：</p>
-<p><a href="https://mybatis.org/mybatis-3/zh/configuration.html">Mybatis3核心配置文件官方说明</a></p>
-<h4 id="sqlsessionfactory">SqlSessionFactory</h4>
-<p>一个SqlSessionFactory只能连接一个数据库实例，如果需要连接多个数据库，需要构建多个SqlSessionFactory对象。</p>
-<p>在构建SqlSesssionFactory时可以指定environment的id，表示使用指定的数据源来构建factory对象</p>
-<pre><code class="language-java">SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in, &quot;dev&quot;);
-</code></pre>
-<h4 id="sqlsession">SqlSession</h4>
-<p>一个SqlSession对象代表一次到数据的会话，该对象有一下功能：</p>
-<ul>
-<li>获取Mapper实现类</li>
-<li>管理事务操作</li>
-</ul>
-<blockquote>
-<p>注意： SqlSession对象是非线程安全的，在多线程环境下，建议不要作为类的实例属性来用。</p>
-</blockquote>
-<h4 id="mapper">Mapper</h4>
-<ul>
-<li>
-<p>Mapper接口类</p>
-<p>定义了增删盖查的方法。注意，必须是接口类型，而且方法只需要定义就可以了。</p>
-</li>
-<li>
-<p>Mapper配置文件</p>
-<p>Mapper配置文件中就是负责实现接口中的方法，它定义了具体要执行什么SQL语句，如何映射结果集。</p>
-<ul>
-<li>配置文件中select、delete、update、insert标签的id必须是对应接口中的方法名。</li>
-<li>mapper文件的namespace属性需要对应Mapper接口的完全类型限定名。</li>
-</ul>
-</li>
-</ul>
-<h3 id="深入mybatis核心配置文件">深入Mybatis核心配置文件</h3>
-<p>具体的参数配置说明参见：</p>
-<p><a href="https://mybatis.org/mybatis-3/zh/configuration.html">Mybatis3核心配置文件官方说明</a></p>
-<h3 id="深入mybatis映射配置文件">深入Mybatis映射配置文件</h3>
-<h4 id="crud语句定义">CRUD语句定义</h4>
-<h5 id="查询语句">查询语句</h5>
-<p>接口中</p>
-<pre><code class="language-java">List&lt;User&gt; queryAllUser();
-
-User queryUserById(Integer id);
-</code></pre>
-<p>xml配置文件中</p>
-<pre><code class="language-xml">&lt;select id=&quot;queryAllUser&quot; resultType=&quot;user&quot;&gt;
-    select * from user
-&lt;/select&gt;
-
-&lt;select id=&quot;queryUserById&quot; resultType=&quot;user&quot;&gt;
-    select * from user where id = #{id}
-&lt;/select&gt;
-</code></pre>
-<h5 id="插入语句">插入语句</h5>
-<h6 id="普通插入语句">普通插入语句</h6>
-<p>接口中</p>
-<pre><code class="language-java">int insertUser(User user);
-</code></pre>
-<p>xml配置文件中</p>
-<pre><code class="language-xml">&lt;insert id=&quot;insertUser&quot;&gt;
-    insert into user (username,nick_name,email)
-    values (#{username},#{nickName},#{email})
-&lt;/insert&gt;
-</code></pre>
-<h6 id="如何返回数据库自增的id">如何返回数据库自增的ID</h6>
-<pre><code class="language-xml">&lt;!-- 给insert语句添加useGeneratedKeys、keyProperty后，mybatis会将自增的id值直接赋值到传进来的user对象的id属性上
-        useGeneratedKeys: 指定需要获取数据库自增的id
-        keyProperty: 指定自增地段的名称
-     --&gt;
-&lt;insert id=&quot;insertUser&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
-    insert into user (username,nick_name,email)
-    values (#{username},#{nickName},#{email})
-&lt;/insert&gt;
-</code></pre>
-<h5 id="删除语句">删除语句</h5>
-<p>接口中</p>
-<pre><code class="language-java">void deleteUserById(Integer id);
-</code></pre>
-<p>XML配置中</p>
-<pre><code class="language-xml">&lt;delete id=&quot;deleteUserById&quot;&gt;
-    delete from user where id = #{id}
-&lt;/delete&gt;
-</code></pre>
-<h5 id="更新语句">更新语句</h5>
-<p>接口中</p>
-<pre><code class="language-java">void updateUser(User user);
-</code></pre>
-<p>XML配置中</p>
-<pre><code class="language-xml">&lt;update id=&quot;updateUser&quot;&gt;
-    update user set password = #{password} where id = #{id}
-&lt;/update&gt;
-</code></pre>
-<h4 id="接口中的参数如果传递到sql中">接口中的参数如果传递到SQL中</h4>
-<h5 id="简单类型参数">简单类型参数</h5>
-<p>接口中：</p>
-<pre><code class="language-java">void deleteUserById(Integer id);
-</code></pre>
-<p>xml配置文件中：</p>
-<pre><code class="language-xml">&lt;delete id=&quot;deleteUserById&quot;&gt;
-    delete from user where id = #{id}
-&lt;/delete&gt;
-</code></pre>
-<h5 id="引用类型参数">引用类型参数</h5>
-<p>接口中：</p>
-<pre><code class="language-java">int insertUser(User user);
-</code></pre>
-<p>xml配置文件中：</p>
-<pre><code class="language-xml">&lt;!-- 给insert语句添加useGeneratedKeys、keyProperty后，mybatis会将自增的id值直接赋值到传进来的user对象的id属性上
-        useGeneratedKeys: 指定需要获取数据库自增的id
-        keyProperty: 指定自增地段的名称
-     --&gt;
-&lt;insert id=&quot;insertUser&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
-    insert into user (username,nick_name,email)
-    values (#{username},#{nickName},#{email})
-&lt;/insert&gt;
-</code></pre>
-<h5 id="当接口中参数和xml配置取值时名称不一样时">当接口中参数和XML配置取值时名称不一样时</h5>
-<p>在接口中的参数前加注解</p>
-<pre><code class="language-java">User queryUserById(@Param(&quot;id&quot;) Integer xxxxxxxId);
-</code></pre>
-<p>在XML中取值时用注解指定的名称</p>
-<pre><code class="language-xml">&lt;select id=&quot;queryUserById&quot; resultType=&quot;user&quot;&gt;
-    select * from user where id = #{id}
-&lt;/select&gt;
-</code></pre>
-<h5 id="与的区别">#{}与${}的区别</h5>
-<ul>
-<li>它俩都可以获取接口调用中传递过来的参数</li>
-<li>#{}会将参数作为占位符，使用预编译语句(PreparedStatement)执行</li>
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow></mrow><mi mathvariant="normal">会</mi><mi mathvariant="normal">直</mi><mi mathvariant="normal">接</mi><mi mathvariant="normal">用</mi><mi mathvariant="normal">实</mi><mi mathvariant="normal">际</mi><mi mathvariant="normal">参</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">替</mi><mi mathvariant="normal">换</mi></mrow><annotation encoding="application/x-tex">{}会直接用实际参数替换</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord"></span><span class="mord cjk_fallback">会</span><span class="mord cjk_fallback">直</span><span class="mord cjk_fallback">接</span><span class="mord cjk_fallback">用</span><span class="mord cjk_fallback">实</span><span class="mord cjk_fallback">际</span><span class="mord cjk_fallback">参</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">替</span><span class="mord cjk_fallback">换</span></span></span></span>{}， 参数可以作为SQL的一部分。</li>
-</ul>
-<p>比如，要实现下面的效果：</p>
-<p>Java代码</p>
-<pre><code class="language-java">List&lt;User&gt; queryAllUserOrderBy(String order);
-
-// 调用：
-mapper.queryAllUserOrderBy(&quot;last_login_time&quot;);
-</code></pre>
-<p>XML配置：</p>
-<pre><code class="language-xml">&lt;select id=&quot;queryAllUserOrderBy&quot; resultMap=&quot;userMap&quot;&gt;
-    select * from user order by ${order} desc;
-&lt;/select&gt;
-</code></pre>
-<p>如果上面使用#{order}取获取参数，最终执行的SQL会是这样：</p>
-<pre><code>==&gt;  Preparing: select * from user order by ? desc; 
-==&gt; Parameters: last_login_time(String)
-</code></pre>
-<p>无法实现排序效果</p>
-<p>如果使用${order}来取参数，最终执行SQL：</p>
-<pre><code>==&gt;  Preparing: select * from user order by last_login_time desc; 
-==&gt; Parameters: 
-</code></pre>
-<p>可以实现排序效果</p>
-<h4 id="结果集如何映射">结果集如何映射</h4>
-<h5 id="resulttype方式">ResultType方式</h5>
-<p>ResultType方式适用于数据库结果集可以直接映射成一个Java类的情况</p>
-<p>Java实体类：</p>
-<pre><code class="language-java">@Getter
-@Setter
-@ToString
-public class User {
-    private Integer id;
-    private String username;
-    private String nickName;
-    private String password;
-    private String email;
-    private Timestamp lastLoginTime;
-}
-</code></pre>
-<p>使用方法：</p>
-<pre><code class="language-xml">&lt;select id=&quot;queryAllUser&quot; resultType=&quot;com.lanou3g.bean.User&quot;&gt;
-    select * from user
-&lt;/select&gt;
-</code></pre>
-<h5 id="resultmap方式">ResultMap方式</h5>
-<p>ResultMap方式适用于复杂的结果集映射，比如数据库返回的结果集中的列名和JavaBean无法一一对应，或者对象间存在一对一、一对多关联映射时。</p>
-<h6 id="解决数据库列名与java类中属性名不一致的映射问题">解决数据库列名与Java类中属性名不一致的映射问题</h6>
-<pre><code class="language-xml">&lt;mapper&gt;
-    ...
-    &lt;resultMap id=&quot;userMap&quot; type=&quot;user&quot;&gt;
-        &lt;id property=&quot;id&quot; column=&quot;id&quot; /&gt;
-        &lt;result property=&quot;username&quot; column=&quot;username&quot; /&gt;
-        &lt;result property=&quot;lastLoginttime&quot; column=&quot;last_login_time&quot; /&gt;
-        &lt;result property=&quot;email&quot; column=&quot;email&quot; /&gt;
-        &lt;result property=&quot;nickName&quot; column=&quot;nick_name&quot; /&gt;
-    &lt;/resultMap&gt;
-    ...
-&lt;/mapper&gt;
-</code></pre>
-<p>在查询语句中将resultType换成resultMap</p>
-<pre><code class="language-xml">&lt;select id=&quot;queryAllUser&quot; resultMap=&quot;userMap&quot;&gt;
-    select * from user
-&lt;/select&gt;
-</code></pre>
-<blockquote>
-<p>其实，如果遇到单纯字段名和属性名不对应的情况，使用别名的方式更简单</p>
-</blockquote>
-<h6 id="解决一对一映射查询问题">解决一对一映射查询问题</h6>
-<h6 id="解决一对多映射查询问题">解决一对多映射查询问题</h6>
-<h4 id="动态sql">动态SQL</h4>
-<h5 id="条件分支sql">条件分支SQL</h5>
-<ul>
-<li>if</li>
-<li>choose&amp;when&amp;otherwise</li>
-</ul>
-<h5 id="循环sql">循环SQL</h5>
-<ul>
-<li>forEach</li>
-</ul>
-<h5 id="其他特殊sql">其他特殊SQL</h5>
-<ul>
-<li>where</li>
-<li>set</li>
-<li>trim</li>
-</ul>
-<h4 id="批量插入">批量插入</h4>
-<h5 id="通过foreach动态sql方式">通过forEach动态SQL方式</h5>
-<h6 id="实现原理">实现原理</h6>
-<p>forEach批量插入的原理是直接通过forEach动态标签，根据传过来的参数数量动态生成一个很长的SQL语句。一个语句就是一次批量插入。</p>
-<p>语句形如：</p>
-<pre><code class="language-sql">insert into user (username, age) values
-('张三', 10),
-('李四', 10),
-('王五', 10),
-('赵六', 10),
-('盖聂', 9000)
-
-# 上面的语句一次会插入5条数据
-</code></pre>
-<p>我们需要做的就是生成此语句就可以了。</p>
-<h6 id="具体做法">具体做法</h6>
-<p>Mapper接口</p>
-<pre><code class="language-java">int batchInsertUser(List&lt;User&gt; userList);
-</code></pre>
-<p>Mapper映射文件</p>
-<pre><code class="language-xml">&lt;insert id=&quot;batchInsertUser&quot;&gt;
-	insert into user (username, age) values
-    &lt;forEach collection=&quot;list&quot; item=&quot;user&quot; separator=&quot;,&quot;&gt;
-    	(#{user.username}, #{user.age})
-    &lt;/forEach&gt;
-&lt;/insert&gt;
-</code></pre>
-<h5 id="通过executorbatch的方式">通过Executor.BATCH的方式</h5>
-<h6 id="实现原理-2">实现原理</h6>
-<p>这种批量插入在底层的Mapper接口和Mapper映射文件中，都只是一个普通插入单条数据的写法。它通过在上层获取SqlSession时，指定执行类型是批量ExcecutorType.BATCH的方式，实现每次执行完单条插入以后并没有真正写入数据库，只有当调用sqlSession.flushStatement()时，才会将这一批数据一次性写入数据库，从而实现批量操作。</p>
-<h6 id="使用步骤">使用步骤</h6>
-<ol>
-<li>
-<p>获取SqlSession时指定执行类型为批量</p>
-<pre><code class="language-java">// 获取一个批量执行的sqlSession对象
-SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
-</code></pre>
-</li>
-<li>
-<p>Mapper接口和Mapper映射文件中只需按照单条插入去写方法和SQL语句即可</p>
-<p>Mapper接口</p>
-<pre><code class="language-java">int insertUser(User user);
-</code></pre>
-<p>XML映射文件</p>
-<pre><code class="language-xml">&lt;insert id=&quot;insertUser&quot;&gt;
-    insert into user (nick_name, status, createtime)
-    values
-    (#{nickName},#{status},#{createtime})
-&lt;/insert&gt;
-</code></pre>
-</li>
-<li>
-<p>空置批量的大小，在够一批数据时，调用<code>sqlSession.flushStatement()</code>去整体往数据库写一次</p>
-<pre><code class="language-java">int batchSize = 100;
-int count = 0;
-List&lt;BatchResult&gt; resultList = new ArrayList&lt;&gt;();
-for(User user : userList) {
-    // ExecutorType.Batch方式这里返回的不是影响的条数，具体获取方法参见下面代码
-    mapper.insertUser(user);
-    count++;
-    if(count % batchSize == 0) {
-        resultList.addAll(sqlSession.flushStatements());
-    }
-}
-if(count % batchSize != 0) {
-    resultList.addAll(sqlSession.flushStatements());
-}
-</code></pre>
-</li>
-<li>
-<p>获取影响的条数</p>
-<p>这种方式获取影响条数没有那么直接，需要去API返回的BatchResult对象中读取updateCounts方法才能拿到。</p>
-<pre><code class="language-java">int rows = 0;
-for(BatchResult batchResult : resultList) {
-    int[] updateCounts = batchResult.getUpdateCounts();
-    for(int updateCount : updateCounts) {
-        rows += updateCount;
-    }
-}
-System.out.println(&quot;批量插入成功，响应的行数：&quot; + rows);
-</code></pre>
-</li>
-</ol>
-<h4 id="缓存">缓存</h4>
-<h5 id="一级缓存本地缓存">一级缓存（本地缓存）</h5>
-<p>Mybatis的一级缓存是指Session缓存。一级缓存的作用域默认是一个SqlSession。Mybatis默认开启一级缓存。<br>
-也就是在同一个SqlSession中，执行相同的查询SQL，第一次会去数据库进行查询，并写到缓存中；<br>
-第二次以后是直接去缓存中取。<br>
-当执行SQL查询中间发生了增删改的操作，MyBatis会把SqlSession的缓存清空。</p>
-<blockquote>
-<p>问题： 如果增删改的表和缓存的表是毫不相干的两个表，是否会清空缓存？</p>
-</blockquote>
-<h6 id="测试方法">测试方法</h6>
-<ol>
-<li>我们在一个 sqlSession 中，对 User 表根据id进行两次查询，查看他们发出sql语句的情况</li>
-</ol>
-<pre><code class="language-java">@Test
-public void testSelectOrderAndUserByOrderId(){
-    //根据 sqlSessionFactory 产生 session
-    SqlSession sqlSession = sessionFactory.openSession();
-    String statement = &quot;one.to.one.mapper.OrdersMapper.selectOrderAndUserByOrderID&quot;;
-    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-    //第一次查询，发出sql语句，并将查询的结果放入缓存中
-    User u1 = userMapper.selectUserByUserId(1);
-    System.out.println(u1);
-     
-    //第二次查询，由于是同一个sqlSession,会在缓存中查找查询结果
-    //如果有，则直接从缓存中取出来，不和数据库进行交互
-    User u2 = userMapper.selectUserByUserId(1);
-    System.out.println(u2);
-     
-    sqlSession.close();
-}
-</code></pre>
-<ol start="2">
-<li>同样是对user表进行两次查询，只不过两次查询之间进行了一次update操作。</li>
-</ol>
-<pre><code class="language-java">@Test
-public void testSelectOrderAndUserByOrderId(){
-    //根据 sqlSessionFactory 产生 session
-    SqlSession sqlSession = sessionFactory.openSession();
-    String statement = &quot;one.to.one.mapper.OrdersMapper.selectOrderAndUserByOrderID&quot;;
-    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-    //第一次查询，发出sql语句，并将查询的结果放入缓存中
-    User u1 = userMapper.selectUserByUserId(1);
-    System.out.println(u1);
-     
-    //第二步进行了一次更新操作，sqlSession.commit()
-    u1.setSex(&quot;女&quot;);
-    userMapper.updateUserByUserId(u1);
-    sqlSession.commit();
-     
-    //第二次查询，由于是同一个sqlSession.commit(),会清空缓存信息
-    //则此次查询也会发出 sql 语句
-    User u2 = userMapper.selectUserByUserId(1);
-    System.out.println(u2);
-     
-    sqlSession.close();
-}
-</code></pre>
-<h5 id="如何禁用一级缓存">如何禁用一级缓存</h5>
-<ul>
-<li>在映射文件中给对应的select标签上添加<code>flushCache=&quot;true&quot;</code>属性</li>
-<li>在核心配置文件中将localCacheScope设置成STATEMENT（默认值是SESSION）</li>
-</ul>
-<h5 id="二级缓存全局缓存">二级缓存（全局缓存）</h5>
-<h6 id="什么是二级缓存">什么是二级缓存？</h6>
-<p>Mybatis中二级缓存相比一级（本地）缓存来说是一个作用域更大的缓存方案。 二级缓存的作用域可以跨多个SqlSession，只要是同一个namespace下的mapper映射文件都可以共享缓存。但是不能跨SqlSessionFactory。</p>
-<p>Mybatis二级缓存需要手动开启。</p>
-<h6 id="开启二级缓存的方法">开启二级缓存的方法</h6>
-<p>1.在 SqlMapConfig.xml 文件开启二级缓存</p>
-<pre><code class="language-xml">&lt;settings&gt; 
-    &lt;!-- 开启全局二级缓存的支持 --&gt;  
-    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt; 
-&lt;/settings&gt; 
-</code></pre>
-<p>2.配置相关的 Mapper 映射文件 (因为二级缓存就是针对特定的mapper namespace的)</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 
-&lt;!DOCTYPE mapper     
-PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;     
-&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt; 
-&lt;mapper namespace=&quot;com.itheima.dao.IUserDao&quot;&gt;  
-    &lt;!-- 开启二级缓存的支持 --&gt;  
-    &lt;cache /&gt;
-&lt;/mapper&gt;
-</code></pre>
-<blockquote>
-<p><cache>标签表示当前这个 mapper 映射将使用二级缓存，能否命中二级缓存就看多次查询是否属于同一个namespace。</p>
-</blockquote>
-<ol start="3">
-<li>设置某个特定的查询语句不用二级缓存</li>
-</ol>
-<pre><code class="language-xml">&lt;!-- 根据 id 查询 --&gt; 
-&lt;select id=&quot;findById&quot; resultType=&quot;user&quot; parameterType=&quot;int&quot; useCache=&quot;false&quot;&gt;  
-    select * from user where id = #{uid} 
-&lt;/select&gt; 
-</code></pre>
-<blockquote>
-<p>注意： 如果mapper文件中没有开启 <cache /> 仅在语句上添加useCache=&quot;true&quot;是无法开启二级缓存的。这个属性本意是用来关闭特定查询的二级缓存。</p>
-</blockquote>
-<h6 id="二级缓存注意事项">二级缓存注意事项</h6>
-<blockquote>
-<p>当我们在使用二级缓存时，所缓存的类一定要实现 java.io.Serializable 接口，这种就可以使用序列化 方式来保存对象。</p>
-</blockquote>
-<pre><code class="language-java">public class User implements Serializable { }
-</code></pre>
-<h4 id="mybatis逆向工程">Mybatis逆向工程</h4>
-<h2 id="spring与mybatis整合">Spring与Mybatis整合</h2>
-<ol>
-<li>
-<p>加入依赖</p>
-<pre><code class="language-xml">&lt;!-- mybatis-spring整合依赖，这个是最主要的一个依赖 --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-    &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
-    &lt;version&gt;2.0.1&lt;/version&gt;
-&lt;/dependency&gt;
-
-&lt;!-- Spring和数据源相关依赖 --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-    &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-    &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-    &lt;artifactId&gt;druid&lt;/artifactId&gt;
-    &lt;version&gt;1.1.20&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-</li>
-<li>
-<p>在Spring bean配置文件中配置Mybatis、Spring整合bean  SqlSessionFactoryBean</p>
-<pre><code class="language-xml">&lt;!-- 配置整合bean --&gt;
-&lt;bean id=&quot;sessionFactoryBean&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-    &lt;!-- 数据源是必要参数 --&gt;
-    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
-    &lt;!-- Mybatis核心配置文件其实大多数情况下都可以省略，通过指定属性可以间接设置核心配置文件中的参数 --&gt;
-    &lt;!--&lt;property name=&quot;configLocation&quot; value=&quot;mybatis_conf.xml&quot; /&gt;--&gt;
-
-    &lt;!-- 省略mybatis核心配置文件后，可以通过类似下面这些特定属性，设置mybatis参数 --&gt;
-    &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.lanou3g.mybatis.spring.bean&quot; /&gt;
-    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot; /&gt;
-&lt;/bean&gt;
-</code></pre>
-</li>
-<li>
-<p>在Spring bean配置文件中开启Mybatis Mapper扫描</p>
-<ol>
-<li>
-<p>需要使用mybatis schema</p>
-<p>配置方法，在bean配置文件的头部添加</p>
-<pre><code class="language-xml">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-       xmlns:mybatis=&quot;http://mybatis.org/schema/mybatis-spring&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-        http://mybatis.org/schema/mybatis-spring
-        http://mybatis.org/schema/mybatis-spring.xsd&quot;&gt;
-</code></pre>
-</li>
-<li>
-<p>开启Mybatis Mapper扫描</p>
-<p>开启Mybatis Mapper扫描的作用是：告诉Mybatis要创建哪个包下接口的实现类，并以bean的方式加入到SpringIOC容器中</p>
-<pre><code class="language-xml">&lt;!-- 开启Mapper扫描，Mybatis会创建将此包下的接口的实现类，并以bean的方式加入到SpringIOC容器中 --&gt;
-&lt;mybatis:scan base-package=&quot;com.lanou3g.mybatis.spring.mapper&quot; /&gt;
-</code></pre>
-</li>
-</ol>
-</li>
-<li>
-<p>创建实体类、mapper映射文件、Mapper接口（可以通过Mybatis逆向工程直接生成）</p>
-<p>Mapper接口</p>
-<pre><code class="language-java">@Repository	//此注解不是必须的，因为MessageMapper类的实现类是由Mybatis创建并放到ioc容器中的，不是由Spring来创建的。
-public interface MessageMapper {
-    int insert(Message record);
-    List&lt;Message&gt; selectAll();
-}
-</code></pre>
-<p>实体类、映射文件 略</p>
-</li>
-<li>
-<p>将Mapper接口用Spring自动注入的方式注入到需要的地方使用</p>
-<p>MessageService.java</p>
-<pre><code class="language-java">@Service
-public class MessageService {
-    @Autowired
-    MessageMapper messageMapper;
-    public List&lt;Message&gt; queryAllMessage() {
-        return messageMapper.selectAll();
-    }
-}
-</code></pre>
-</li>
-</ol>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
     <entry>
